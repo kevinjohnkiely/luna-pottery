@@ -17,7 +17,7 @@ body {
 /* Slightly larger container on xl screens */
 @media (min-width: 1200px) {
     .container {
-        max-width: 80%;
+        /* max-width: 80%; */
     }
 }
 
@@ -32,6 +32,6 @@ body {
     }
 
     .header-container {
-        padding-top: 164px;
+        /* padding-top: 164px; */
     }
 }
