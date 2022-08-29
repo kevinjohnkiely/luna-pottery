@@ -16,7 +16,7 @@ class Product(models.Model):
     category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
     product_code = models.CharField(max_length=200, null=True, blank=True)
     name = models.CharField(max_length=200)
-    name = models.TextField()
+    description = models.TextField(default='Product Description')
     price = models.DecimalField(max_digits=5, decimal_places=2)
     rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
     image_url = models.URLField(max_length=2000, null=True, blank=True)
