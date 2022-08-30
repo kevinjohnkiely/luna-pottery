@@ -12,6 +12,10 @@ body {
     width: fit-content;
 }
 
+.moon-yellow {
+    color: #FFDE00;
+}
+
 /***** MEDIA QUERIES *****/
 
 /* Slightly larger container on xl screens */
