@@ -88,7 +88,7 @@
             </div>
           </li>
           <li class="list-inline-item">
-            <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-info{% endif %} nav-link" href="">
+            <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-info{% endif %} nav-link" href="{% url 'view_cart' %}">
               <div class="text-center">
                 <div><i class="fas fa-shopping-bag fa-lg"></i></div>
                 <p class="my-0">
@@ -114,6 +114,7 @@
         {% include 'includes/main-navbar.html' %}
       </nav>
     </div>
+    Welcome: {{ user.id }}
   </header>
   {% if messages %}
   <div class="messages-box"></div>
