@@ -20,7 +20,9 @@
         <div class="row">
             <div class="col">
                 {% if cart_items %}
-                <div class="table-responsive rounded"></div>
+                <div class="table-responsive rounded">
+                    {{ cart_items }}
+                </div>
                 {% else %}
                 <p class="lead mb-4">Cart is empty!</p>
                 <a class="btn btn-outline-info rounded btn-lg" href="{% url 'products' %}">
