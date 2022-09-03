@@ -17,8 +17,3 @@ function sortSelectorFunction() {
         window.location.replace(currentUrl)
     }
 }
-
-var btnBackTop = document.getElementById('btt-back-top')
-btnBackTop.addEventListener('click', () => {
-    window.scrollTo(0,0)
-})
