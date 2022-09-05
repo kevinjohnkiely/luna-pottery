@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cart_tools %}
 
 {% block page_header %}
 <div class="container header-container">
@@ -46,7 +47,7 @@
                         </td>
                         <td class="py-3 w-25">
                             <!-- quantity form goes here -->
-                            <form class="form update-form" method="POST" action="">
+                            <form class="form update-form" method="POST" action="{% url 'alter_cart' item.item_id %}">
                                 {% csrf_token %}
                                 <div class="form-group">
                                     <div class="input-group">
@@ -73,12 +74,12 @@
                                 </div>
                             </form>
                             <a class="update-link text-info"><small>Update</small></a>
-                            <a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}"
-                                data-size="{{ item.size }}"><small>Remove</small></a>
+                            <a class="remove-item text-danger float-right"
+                                id="remove_{{ item.item_id }}"><small>Remove</small></a>
 
                         </td>
                         <td class="py-3">
-                            <p class="my-0">${{ item.product.price }}</p>
+                            <p class="my-0">${{ item.product.price | calculate_subtotal:item.quantity  }}</p>
                         </td>
                     </tr>
                     {% endfor %}
@@ -122,89 +123,30 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    function handleEnableDisable(itemId) {
-        var curValue = parseInt(document.getElementById(`id_qty_${itemId}`).value)
-        var minusDisabled = curValue < 2
-        var plusDisabled = curValue > 98
+{% endblock %}
 
-        var incQty = document.getElementById(`increment-qty_${itemId}`)
-        incQty.disabled = plusDisabled
-        var decQty = document.getElementById(`decrement-qty_${itemId}`)
-        decQty.disabled = minusDisabled
-    }
-
-    var allQtyInputs = document.getElementsByClassName('qty_input')
-
-    var incQty = document.getElementsByClassName('increment-qty')[0]
-    incQty.addEventListener('click', (event) => {
-        event.preventDefault()
-
-        var startValue = document.getElementsByClassName('qty_input')[0].value
-        var newValue = parseInt(startValue) + 1
-        document.getElementsByClassName('qty_input')[0].value = newValue
-
-        var itemId = incQty.dataset.item_id
-        console.log(itemId)
-        handleEnableDisable(itemId)
-    })
-
-    var decQty = document.getElementsByClassName('decrement-qty')[0]
-    decQty.addEventListener('click', (event) => {
-        event.preventDefault()
-
-        var startValue = document.getElementsByClassName('qty_input')[0].value
-        var newValue = parseInt(startValue) - 1
-        document.getElementsByClassName('qty_input')[0].value = newValue
-
-        var itemId = decQty.dataset.item_id
-        handleEnableDisable(itemId)
-    })
-</script>
+{% block postloadjs %}
+{{ block.super }}
+{% include 'products/includes/qty_input_script.html' %}
 
 <script type="text/javascript">
-    // Update qty on click
-    var updateQtyArr = document.getElementsByClassName('update-link')
+    // Update quantity on click
+    $('.update-link').click(function(e) {
+        var form = $(this).prev('.update-form');
+        form.submit();
+    })
 
-    for (const link of updateQtyArr) {
-        link.addEventListener('click', () => {
-            console.log('test')
-            var form = document.getElementsByClassName('update-form')[0]
-            form.submit()
-        })
-    }
+    // Remove item and reload on click
+    $('.remove-item').click(function(e) {
+        var csrfToken = "{{ csrf_token }}";
+        var itemId = $(this).attr('id').split('remove_')[1];
+        var url = `/cart/remove/${itemId}/`;
+        var data = {'csrfmiddlewaretoken': csrfToken};
 
-    // Remove from cart and reload on click
-    var removeItemArr = document.getElementsByClassName('remove-item')
-
-    for (const link of removeItemArr) {
-        link.addEventListener('click', () => {
-            var token = "{{ csrf_token }}"
-            var itemId = link.id.split('remove_')[1]
-            var url = `/cart/remove/${itemId}`
-            var data = {
-                'csrfmiddlewaretoken': token
-            }
-
-            // Fetch function to post data
-            postData(data, url)
-        })
-    }
-
-    async function postData(theData, theUrl) {
-        const response = await fetch(theUrl, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: data,
-        });
-
-        response.json().then(data => {
-            console.log(data);
-            location.reload();
-        });
-    }
+        $.post(url, data)
+         .done(function() {
+             location.reload();
+         });
+    })
 </script>
 {% endblock %}

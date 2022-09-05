@@ -22,7 +22,7 @@ def cart_contents(request):
         })
 
     if cart_total < settings.FREE_DELIVERY_THRESHOLD:
-        delivery = cart_total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE)
+        delivery = cart_total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)
         free_delivery_amount_remaining = settings.FREE_DELIVERY_THRESHOLD - cart_total
     else:
         delivery = 0

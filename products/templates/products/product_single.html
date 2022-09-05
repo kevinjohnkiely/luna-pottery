@@ -90,42 +90,9 @@
     </div>
 
 </div>
-<script type="text/javascript">
+{% endblock %}
 
-    function handleEnableDisable(itemId) {
-        var curValue = parseInt(document.getElementById(`id_qty_${itemId}`).value)
-        var minusDisabled = curValue < 2
-        var plusDisabled = curValue > 98
-
-        var incQty = document.getElementById(`increment-qty_${itemId}`)
-        incQty.disabled = plusDisabled
-        var decQty = document.getElementById(`decrement-qty_${itemId}`)
-        decQty.disabled = minusDisabled
-    }
-
-    var incQty = document.getElementsByClassName('increment-qty')[0]
-    incQty.addEventListener('click', (event) => {
-        event.preventDefault()
-        
-        var startValue = document.getElementsByClassName('qty_input')[0].value
-        var newValue = parseInt(startValue) + 1
-        document.getElementsByClassName('qty_input')[0].value = newValue
-
-        var itemId = incQty.dataset.item_id
-        console.log(itemId)
-        handleEnableDisable(itemId)
-    })
-
-    var decQty = document.getElementsByClassName('decrement-qty')[0]
-    decQty.addEventListener('click', (event) => {
-        event.preventDefault()
-        
-        var startValue = document.getElementsByClassName('qty_input')[0].value
-        var newValue = parseInt(startValue) - 1
-        document.getElementsByClassName('qty_input')[0].value = newValue
-
-        var itemId = decQty.dataset.item_id
-        handleEnableDisable(itemId)
-    })
-</script>
+{% block postloadjs %}
+{{ block.super }}
+{% include 'products/includes/qty_input_script.html' %}
 {% endblock %}
