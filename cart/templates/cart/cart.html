@@ -45,7 +45,37 @@
                             <p class="my-0">${{ item.product.price }}</p>
                         </td>
                         <td class="py-3 w-25">
-                            <p class="my-0">{{ item.quantity }}</p>
+                            <!-- quantity form goes here -->
+                            <form class="form update-form" method="POST" action="">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <button class="decrement-qty btn btn-sm btn-black rounded-0"
+                                                data-item_id="{{ item.item_id }}" id="decrement-qty_{{ item.item_id }}">
+                                                <span>
+                                                    <i class="fas fa-minus fa-sm"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                        <input class="form-control form-control-sm qty_input" type="number"
+                                            name="quantity" value="{{ item.quantity }}" min="1" max="99"
+                                            data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
+                                        <div class="input-group-append">
+                                            <button class="increment-qty btn btn-sm btn-black rounded-0"
+                                                data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
+                                                <span>
+                                                    <i class="fas fa-plus fa-sm"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <a class="update-link text-info"><small>Update</small></a>
+                            <a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}"
+                                data-size="{{ item.size }}"><small>Remove</small></a>
+
                         </td>
                         <td class="py-3">
                             <p class="my-0">${{ item.product.price }}</p>
@@ -92,4 +122,89 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function handleEnableDisable(itemId) {
+        var curValue = parseInt(document.getElementById(`id_qty_${itemId}`).value)
+        var minusDisabled = curValue < 2
+        var plusDisabled = curValue > 98
+
+        var incQty = document.getElementById(`increment-qty_${itemId}`)
+        incQty.disabled = plusDisabled
+        var decQty = document.getElementById(`decrement-qty_${itemId}`)
+        decQty.disabled = minusDisabled
+    }
+
+    var allQtyInputs = document.getElementsByClassName('qty_input')
+
+    var incQty = document.getElementsByClassName('increment-qty')[0]
+    incQty.addEventListener('click', (event) => {
+        event.preventDefault()
+
+        var startValue = document.getElementsByClassName('qty_input')[0].value
+        var newValue = parseInt(startValue) + 1
+        document.getElementsByClassName('qty_input')[0].value = newValue
+
+        var itemId = incQty.dataset.item_id
+        console.log(itemId)
+        handleEnableDisable(itemId)
+    })
+
+    var decQty = document.getElementsByClassName('decrement-qty')[0]
+    decQty.addEventListener('click', (event) => {
+        event.preventDefault()
+
+        var startValue = document.getElementsByClassName('qty_input')[0].value
+        var newValue = parseInt(startValue) - 1
+        document.getElementsByClassName('qty_input')[0].value = newValue
+
+        var itemId = decQty.dataset.item_id
+        handleEnableDisable(itemId)
+    })
+</script>
+
+<script type="text/javascript">
+    // Update qty on click
+    var updateQtyArr = document.getElementsByClassName('update-link')
+
+    for (const link of updateQtyArr) {
+        link.addEventListener('click', () => {
+            console.log('test')
+            var form = document.getElementsByClassName('update-form')[0]
+            form.submit()
+        })
+    }
+
+    // Remove from cart and reload on click
+    var removeItemArr = document.getElementsByClassName('remove-item')
+
+    for (const link of removeItemArr) {
+        link.addEventListener('click', () => {
+            var token = "{{ csrf_token }}"
+            var itemId = link.id.split('remove_')[1]
+            var url = `/cart/remove/${itemId}`
+            var data = {
+                'csrfmiddlewaretoken': token
+            }
+
+            // Fetch function to post data
+            postData(data, url)
+        })
+    }
+
+    async function postData(theData, theUrl) {
+        const response = await fetch(theUrl, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: data,
+        });
+
+        response.json().then(data => {
+            console.log(data);
+            location.reload();
+        });
+    }
+</script>
 {% endblock %}
