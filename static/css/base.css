@@ -37,6 +37,14 @@ a.category-badge > span.badge:hover {
     cursor: pointer;
 }
 
+.messages-box {
+    position: fixed;
+    top: 70px;
+    right: 25px;
+    z-index: 9999999;
+}
+
+
 /***** MEDIA QUERIES *****/
 
 /* Slightly larger container on xl screens */
