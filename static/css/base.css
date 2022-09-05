@@ -44,6 +44,11 @@ a.category-badge > span.badge:hover {
     z-index: 9999999;
 }
 
+.bag-notification-wrapper {
+    height: 100px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 
 /***** MEDIA QUERIES *****/
 
