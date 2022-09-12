@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class Category(models.Model):
 
@@ -29,3 +29,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Rating(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="products_rating")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="users_rating")
+    rating = models.IntegerField(null=True, blank=True)

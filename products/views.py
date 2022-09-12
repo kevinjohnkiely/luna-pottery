@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
 from django.db.models.functions import Lower
-from .models import Product, Category
+from .models import Product, Category, Rating
+from .forms import RatingForm
+from django.contrib.auth.models import User
 
 
 def all_products(request):
@@ -59,11 +61,36 @@ def all_products(request):
 
 def product_single(request, product_id):
     """A view to render a single page showing the individual product details"""
-
     product = get_object_or_404(Product, pk=product_id)
 
+    if request.POST:
+        user = request.user
+        rating_form = RatingForm(data=request.POST)
+
+        if rating_form.is_valid():
+            # rating_form.instance.rating = request.user.rating
+            rating = rating_form.save(commit=False)
+            rating.product = product
+            rating.user = user
+            rating.save()
+        else:
+            rating_form = RatingForm()
+
+    queryset = Rating.objects.filter(product=product_id)
+
+    total_ratings = 0
+    for result in queryset:
+        # print(result.rating)
+        total_ratings += result.rating
+
+
+    avg_rating = total_ratings / queryset.count()
+
     context = {
-        'product': product
+        'product': product,
+        'avg_rating': avg_rating,
+        'rating_form': RatingForm()
     }
 
     return render(request, 'products/product_single.html', context)
+
