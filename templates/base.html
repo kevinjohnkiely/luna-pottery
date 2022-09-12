@@ -45,7 +45,7 @@
 </head>
 
 <body>
-  <header class="container-fluid fixed-top">
+  <header class="container-fluid-xl fixed-top">
     <div id="nav-top" class="row bg-white pt-lg-2 d-none d-lg-flex">
       <div class="col-12 col-lg-4 my-auto py-2 py-lg-0 text-center text-lg-left">
         <a href="{% url 'welcome' %}" class="nav-link navbar-logo-link">
@@ -114,28 +114,26 @@
         {% include 'includes/main-navbar.html' %}
       </nav>
     </div>
-    Welcome: {{ user.id }}
-    <div id="delivery-banner" class="row text-center">
-      <div class="col bg-black text-white">
-        <h4 class="logo-font my-1">Free delivery on orders over ${{ free_delivery_threshold }}!</h4>
-      </div>
+    <div class="py-2 bg-info text-white text-center" id="secondary-info-bar">Welcome: {{  user.email  }} | 
+      <strong>Free delivery on orders over €{{ free_delivery_threshold }}!</strong>
     </div>
   </header>
+
   {% if messages %}
   <div class="messages-box">
     {% for message in messages %}
-      {% with message.level as level %}
-          {% if level == 40 %}
-              {% include 'includes/toasts/toast_error.html' %}
-          {% elif level == 30 %}
-              {% include 'includes/toasts/toast_warning.html' %}
-          {% elif level == 25 %}
-              {% include 'includes/toasts/toast_success.html' %}
-          {% else %}
-              {% include 'includes/toasts/toast_info.html' %}
-          {% endif %}
-      {% endwith %}
-      {% endfor %}
+    {% with message.level as level %}
+    {% if level == 40 %}
+    {% include 'includes/toasts/toast_error.html' %}
+    {% elif level == 30 %}
+    {% include 'includes/toasts/toast_warning.html' %}
+    {% elif level == 25 %}
+    {% include 'includes/toasts/toast_success.html' %}
+    {% else %}
+    {% include 'includes/toasts/toast_info.html' %}
+    {% endif %}
+    {% endwith %}
+    {% endfor %}
   </div>
   {% endif %}
 
@@ -144,6 +142,10 @@
 
   {% block content %}
   {% endblock %}
+
+  <footer id="page-footer" class="bg-info text-white text-center py-5 mx-auto mt-5">
+    &copy; 2022 - Luna Pottery - A Code Institute Creation
+  </footer>
 
   {% block postloadjs %}
   <script type="text/javascript">

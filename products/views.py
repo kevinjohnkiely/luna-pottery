@@ -83,12 +83,11 @@ def product_single(request, product_id):
         # print(result.rating)
         total_ratings += result.rating
 
-
     avg_rating = total_ratings / queryset.count()
 
     context = {
         'product': product,
-        'avg_rating': avg_rating,
+        'avg_rating': round(avg_rating, 2),
         'rating_form': RatingForm()
     }
 

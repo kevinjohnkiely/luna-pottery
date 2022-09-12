@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+RATINGS = ((1, 1), (2, 2), (3, 3), (4, 4), (5, 5))
+
+
 class Category(models.Model):
 
     class Meta:
@@ -34,4 +37,4 @@ class Product(models.Model):
 class Rating(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="products_rating")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="users_rating")
-    rating = models.IntegerField(null=True, blank=True)
+    rating = models.IntegerField(choices=RATINGS, null=True, blank=True)

@@ -17,6 +17,10 @@ body {
     color: #FFDE00;
 }
 
+#secondary-info-bar {
+    color: white;
+}
+
 a.category-badge > span.badge:hover {
     background: #5bc0de !important;
     color: white !important;
@@ -48,6 +52,10 @@ a.category-badge > span.badge:hover {
     height: 100px;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+#page-footer {
+    border-top: 3px solid #FFDE00;
 }
 
 /***** MEDIA QUERIES *****/
