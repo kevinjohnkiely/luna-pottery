@@ -38,3 +38,10 @@ class Rating(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="products_rating")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="users_rating")
     rating = models.IntegerField(choices=RATINGS, null=True, blank=True)
+
+
+class Review(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="products_review")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="users_review")
+    review_text = models.TextField(max_length=150)
+    created_at = models.DateTimeField(auto_now_add=True)

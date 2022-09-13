@@ -26,7 +26,7 @@
         </div>
         <div class="col-12 col-md-6 col-lg-4">
             <div class="product-details-container mb-5 mt-md-5">
-                <p class="mb-0">{{ product.name }}</p>
+                <h3 class="mb-0">{{ product.name }}</h3>
                 <p>{{ product.in_stock_amount }} left in stock</p>
                 <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
                 {% if product.category %}
@@ -98,6 +98,17 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h3 class="text-center">Review This Piece</h3>
+            <form method="post">
+                {{ review_form | crispy }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-signup btn-lg mt-3">Submit Review</button>
+            </form>
+        </div>
+        
     </div>
 
 </div>
