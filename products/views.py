@@ -63,24 +63,22 @@ def product_single(request, product_id):
     """A view to render a single page showing the individual product details"""
     product = get_object_or_404(Product, pk=product_id)
 
-    if request.POST:
-        user = request.user
-        rating_form = RatingForm(data=request.POST)
+    # if request.POST:
+    #     user = request.user
+    #     review_form = ReviewForm(data=request.POST)
 
-        if rating_form.is_valid():
-            # rating_form.instance.rating = request.user.rating
-            rating = rating_form.save(commit=False)
-            rating.product = product
-            rating.user = user
-            rating.save()
-        else:
-            rating_form = RatingForm()
+    #     if review_form.is_valid():
+    #         review = review_form.save(commit=False)
+    #         review.product = product
+    #         review.user = user
+    #         review.save()
+    #     else:
+    #         review_form = ReviewForm()
 
     queryset = Rating.objects.filter(product=product_id)
 
     total_ratings = 0
     for result in queryset:
-        # print(result.rating)
         total_ratings += result.rating
 
     avg_rating = total_ratings / queryset.count()
@@ -93,3 +91,33 @@ def product_single(request, product_id):
 
     return render(request, 'products/product_single.html', context)
 
+
+def add_rating(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+
+    user = request.user
+    rating_form = RatingForm(data=request.POST)
+
+    if rating_form.is_valid():
+        rating = rating_form.save(commit=False)
+        rating.product = product
+        rating.user = user
+        rating.save()
+    else:
+        rating_form = RatingForm()
+
+    queryset = Rating.objects.filter(product=product_id)
+
+    total_ratings = 0
+    for result in queryset:
+        total_ratings += result.rating
+
+    avg_rating = total_ratings / queryset.count()
+
+    context = {
+        'product': product,
+        'avg_rating': round(avg_rating, 2),
+        'rating_form': RatingForm()
+    }
+
+    return render(request, 'products/product_single.html', context)
