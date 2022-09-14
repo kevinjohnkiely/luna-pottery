@@ -21,7 +21,7 @@ body {
     color: white;
 }
 
-a.category-badge > span.badge:hover {
+a.category-badge>span.badge:hover {
     background: #5bc0de !important;
     color: white !important;
 }
@@ -52,6 +52,11 @@ a.category-badge > span.badge:hover {
     height: 100px;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+.btn-wishlist {
+    border: none;
+    background: transparent;
 }
 
 #page-footer {

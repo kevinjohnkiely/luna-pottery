@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
 from django.db.models.functions import Lower
-from .models import Product, Category, Rating, Review
+from .models import Product, Category, Rating, Review, Wishlist
 from .forms import RatingForm, ReviewForm
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 
 def all_products(request):
@@ -67,6 +68,19 @@ def product_single(request, product_id):
     rating_form = RatingForm(data=request.GET)
     user = request.user
 
+    ### WISHLIST LOGIC ###
+    wishlists = Wishlist.objects.filter(product=product_id)
+    print(wishlists)
+    user_wishlist = []
+
+    for result in wishlists:
+        user_wishlist.append(result.user)
+
+    if user in user_wishlist:
+        wishlisted = True
+    else:
+        wishlisted = False
+
     if request.POST:
         user = request.user
         review_form = ReviewForm(data=request.POST)
@@ -105,7 +119,8 @@ def product_single(request, product_id):
         'reviews': queryset_reviews,
         'rating_form': rating_form,
         'review_form': ReviewForm(),
-        'rated_by_user': rated_by_user
+        'rated_by_user': rated_by_user,
+        'wishlisted': wishlisted
     }
 
     return render(request, 'products/product_single.html', context)
@@ -115,15 +130,29 @@ def add_rating(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
 
     user = request.user
+
+    ### WISHLIST LOGIC ###
+    wishlists = Wishlist.objects.filter(product=product_id)
+    print(wishlists)
+    user_wishlist = []
+
+    for result in wishlists:
+        user_wishlist.append(result.user)
+
+    if user in user_wishlist:
+        wishlisted = True
+    else:
+        wishlisted = False
+
     rating_form = RatingForm(data=request.POST)
     review_form = ReviewForm(data=request.GET)
 
     if rating_form.is_valid():
         rating = rating_form.save(commit=False)
-        print(rating)
         rating.product = product
         rating.user = user
         rating.save()
+        messages.info(request, f'You gave {product.name} a rating of {rating.rating}!')
     else:
         rating_form = RatingForm()
 
@@ -153,7 +182,75 @@ def add_rating(request, product_id):
         'reviews': queryset_reviews,
         'rating_form': RatingForm(),
         'review_form': review_form,
-        'rated_by_user': rated_by_user
+        'rated_by_user': rated_by_user,
+        'wishlisted': wishlisted
     }
 
     return render(request, 'products/product_single.html', context)
+
+
+def add_to_wishlist(request, product_id):
+
+    product = get_object_or_404(Product, pk=product_id)
+    user = request.user
+
+    ### WISHLIST LOGIC ###
+    wishlist = Wishlist()
+    wishlist.product = product
+    wishlist.user = user
+    wishlist.save()
+    messages.info(request, f'You added {product.name} to your wishlist!')
+
+    wishlists = Wishlist.objects.filter(product=product_id)
+    print(wishlists)
+    user_wishlist = []
+
+    for result in wishlists:
+        user_wishlist.append(result.user)
+
+    if user in user_wishlist:
+        wishlisted = True
+    else:
+        wishlisted = False
+
+    rating_form = RatingForm(data=request.POST)
+    review_form = ReviewForm(data=request.GET)
+
+    queryset_ratings = Rating.objects.filter(product=product_id)
+    queryset_reviews = Review.objects.filter(product=product_id)
+
+    total_ratings = 0
+    ratings_by_user = []
+
+    for result in queryset_ratings:
+        total_ratings += result.rating
+        ratings_by_user.append(result.user)
+
+    if user in ratings_by_user:
+        rated_by_user = True
+    else:
+        rated_by_user = False
+
+    if queryset_ratings:
+        avg_rating = total_ratings / queryset_ratings.count()
+    else:
+        avg_rating = 0
+
+    context = {
+        'product': product,
+        'avg_rating': round(avg_rating, 2),
+        'reviews': queryset_reviews,
+        'rating_form': rating_form,
+        'review_form': review_form,
+        'rated_by_user': rated_by_user,
+        'wishlisted': wishlisted
+    }
+
+    return render(request, 'products/product_single.html', context)
+
+
+def wishlist(request):
+    wishlists = Wishlist.objects.all()
+    print(wishlists)
+
+    return render(request, 'products/wishlist.html')

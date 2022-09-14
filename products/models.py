@@ -45,3 +45,8 @@ class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="users_review")
     review_text = models.TextField(max_length=150)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Wishlist(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="wishlist_product")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="wishlist_user")
