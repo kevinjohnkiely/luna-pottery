@@ -65,6 +65,7 @@ def product_single(request, product_id):
     """A view to render a single page showing the individual product details"""
     product = get_object_or_404(Product, pk=product_id)
     rating_form = RatingForm(data=request.GET)
+    user = request.user
 
     if request.POST:
         user = request.user
@@ -77,13 +78,21 @@ def product_single(request, product_id):
             review.save()
         else:
             review_form = ReviewForm()
-            
+
     queryset_ratings = Rating.objects.filter(product=product_id)
     queryset_reviews = Review.objects.filter(product=product_id)
 
     total_ratings = 0
+    ratings_by_user = []
+
     for result in queryset_ratings:
         total_ratings += result.rating
+        ratings_by_user.append(result.user)
+
+    if user in ratings_by_user:
+        rated_by_user = True
+    else:
+        rated_by_user = False
 
     if queryset_ratings:
         avg_rating = total_ratings / queryset_ratings.count()
@@ -95,7 +104,8 @@ def product_single(request, product_id):
         'avg_rating': round(avg_rating, 2),
         'reviews': queryset_reviews,
         'rating_form': rating_form,
-        'review_form': ReviewForm()
+        'review_form': ReviewForm(),
+        'rated_by_user': rated_by_user
     }
 
     return render(request, 'products/product_single.html', context)
@@ -121,8 +131,16 @@ def add_rating(request, product_id):
     queryset_reviews = Review.objects.filter(product=product_id)
 
     total_ratings = 0
+    ratings_by_user = []
+
     for result in queryset_ratings:
         total_ratings += result.rating
+        ratings_by_user.append(result.user)
+
+    if user in ratings_by_user:
+        rated_by_user = True
+    else:
+        rated_by_user = False
 
     if queryset_ratings:
         avg_rating = total_ratings / queryset_ratings.count()
@@ -134,7 +152,8 @@ def add_rating(request, product_id):
         'avg_rating': round(avg_rating, 2),
         'reviews': queryset_reviews,
         'rating_form': RatingForm(),
-        'review_form': review_form
+        'review_form': review_form,
+        'rated_by_user': rated_by_user
     }
 
     return render(request, 'products/product_single.html', context)
