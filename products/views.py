@@ -247,10 +247,3 @@ def add_to_wishlist(request, product_id):
     }
 
     return render(request, 'products/product_single.html', context)
-
-
-def wishlist(request):
-    wishlists = Wishlist.objects.all()
-    print(wishlists)
-
-    return render(request, 'products/wishlist.html')

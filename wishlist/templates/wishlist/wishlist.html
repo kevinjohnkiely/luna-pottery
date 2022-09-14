@@ -19,8 +19,8 @@
     <div class="row">
         <div class="product-container col-10 offset-1">
             <div class="row">
-                {% for product in wishlist %}
-                <div>{{ product.name }}</div>
+                {% for product in wishlist_products %}
+                <div>{{ product.product.name }}</div>
                 <!-- <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                     <div class="card h-100 border-4 mb-2">
                         {% if product.image %}
