@@ -13,10 +13,6 @@ def all_products(request):
     """A view to render the list of products page, including sorting & searching"""
 
     products = Product.objects.all()
-    all_ratings = Rating.objects.all()
-    print('products in product view')
-    print(products[0].id)
-    print(all_ratings[0].product.id)
     query = None
     categories = None
     sort = None
@@ -73,7 +69,7 @@ def product_single(request, product_id):
     user = request.user
 
 
-    ### WISHLIST LOGIC ###
+    # WISHLIST LOGIC
     wishlists = Wishlist.objects.filter(product=product_id)
     print(wishlists)
     user_wishlist = []
@@ -99,7 +95,8 @@ def product_single(request, product_id):
             review_form = ReviewForm()
 
     queryset_reviews = Review.objects.filter(product=product_id)
-    
+
+    # RATINGS LOGIC
     queryset_ratings = Rating.objects.filter(product=product_id)
     total_ratings = 0
     ratings_by_user = []
@@ -115,8 +112,13 @@ def product_single(request, product_id):
 
     if queryset_ratings:
         avg_rating = total_ratings / queryset_ratings.count()
+        product.avg_rating = avg_rating
+        product.save()
     else:
         avg_rating = 0
+        product.avg_rating = avg_rating
+        product.save()
+
 
     context = {
         'product': product,
