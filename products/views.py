@@ -6,12 +6,17 @@ from .models import Product, Category, Rating, Review, Wishlist
 from .forms import RatingForm, ReviewForm
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 
 def all_products(request):
     """A view to render the list of products page, including sorting & searching"""
 
     products = Product.objects.all()
+    all_ratings = Rating.objects.all()
+    print('products in product view')
+    print(products[0].id)
+    print(all_ratings[0].product.id)
     query = None
     categories = None
     sort = None
@@ -45,7 +50,8 @@ def all_products(request):
                 messages.error(request, "You did not enter a search term!")
                 return redirect(reverse('products'))
 
-            queries = Q(name__icontains=query) | Q(description__icontains=query)
+            queries = Q(name__icontains=query) | Q(
+                description__icontains=query)
             products = products.filter(queries)
 
     current_sorting = f'{sort}_{direction}'
@@ -59,14 +65,13 @@ def all_products(request):
 
     return render(request, 'products/products.html', context)
 
-### REFACTOR FROM HERE ON IN FUTURE !!!
-
 
 def product_single(request, product_id):
     """A view to render a single page showing the individual product details"""
     product = get_object_or_404(Product, pk=product_id)
     rating_form = RatingForm(data=request.GET)
     user = request.user
+
 
     ### WISHLIST LOGIC ###
     wishlists = Wishlist.objects.filter(product=product_id)
@@ -93,9 +98,9 @@ def product_single(request, product_id):
         else:
             review_form = ReviewForm()
 
-    queryset_ratings = Rating.objects.filter(product=product_id)
     queryset_reviews = Review.objects.filter(product=product_id)
-
+    
+    queryset_ratings = Rating.objects.filter(product=product_id)
     total_ratings = 0
     ratings_by_user = []
 
@@ -128,65 +133,20 @@ def product_single(request, product_id):
 
 def add_rating(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-
     user = request.user
-
-    ### WISHLIST LOGIC ###
-    wishlists = Wishlist.objects.filter(product=product_id)
-    print(wishlists)
-    user_wishlist = []
-
-    for result in wishlists:
-        user_wishlist.append(result.user)
-
-    if user in user_wishlist:
-        wishlisted = True
-    else:
-        wishlisted = False
-
     rating_form = RatingForm(data=request.POST)
-    review_form = ReviewForm(data=request.GET)
 
     if rating_form.is_valid():
         rating = rating_form.save(commit=False)
         rating.product = product
         rating.user = user
         rating.save()
-        messages.info(request, f'You gave {product.name} a rating of {rating.rating}!')
+        messages.info(
+            request, f'You gave {product.name} a rating of {rating.rating}!')
     else:
         rating_form = RatingForm()
 
-    queryset_ratings = Rating.objects.filter(product=product_id)
-    queryset_reviews = Review.objects.filter(product=product_id)
-
-    total_ratings = 0
-    ratings_by_user = []
-
-    for result in queryset_ratings:
-        total_ratings += result.rating
-        ratings_by_user.append(result.user)
-
-    if user in ratings_by_user:
-        rated_by_user = True
-    else:
-        rated_by_user = False
-
-    if queryset_ratings:
-        avg_rating = total_ratings / queryset_ratings.count()
-    else:
-        avg_rating = 0
-
-    context = {
-        'product': product,
-        'avg_rating': round(avg_rating, 2),
-        'reviews': queryset_reviews,
-        'rating_form': RatingForm(),
-        'review_form': review_form,
-        'rated_by_user': rated_by_user,
-        'wishlisted': wishlisted
-    }
-
-    return render(request, 'products/product_single.html', context)
+    return HttpResponseRedirect(reverse('product_single', args=[product_id]))
 
 
 def add_to_wishlist(request, product_id):
@@ -194,56 +154,10 @@ def add_to_wishlist(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     user = request.user
 
-    ### WISHLIST LOGIC ###
     wishlist = Wishlist()
     wishlist.product = product
     wishlist.user = user
     wishlist.save()
     messages.info(request, f'You added {product.name} to your wishlist!')
 
-    wishlists = Wishlist.objects.filter(product=product_id)
-    print(wishlists)
-    user_wishlist = []
-
-    for result in wishlists:
-        user_wishlist.append(result.user)
-
-    if user in user_wishlist:
-        wishlisted = True
-    else:
-        wishlisted = False
-
-    rating_form = RatingForm(data=request.POST)
-    review_form = ReviewForm(data=request.GET)
-
-    queryset_ratings = Rating.objects.filter(product=product_id)
-    queryset_reviews = Review.objects.filter(product=product_id)
-
-    total_ratings = 0
-    ratings_by_user = []
-
-    for result in queryset_ratings:
-        total_ratings += result.rating
-        ratings_by_user.append(result.user)
-
-    if user in ratings_by_user:
-        rated_by_user = True
-    else:
-        rated_by_user = False
-
-    if queryset_ratings:
-        avg_rating = total_ratings / queryset_ratings.count()
-    else:
-        avg_rating = 0
-
-    context = {
-        'product': product,
-        'avg_rating': round(avg_rating, 2),
-        'reviews': queryset_reviews,
-        'rating_form': rating_form,
-        'review_form': review_form,
-        'rated_by_user': rated_by_user,
-        'wishlisted': wishlisted
-    }
-
-    return render(request, 'products/product_single.html', context)
+    return HttpResponseRedirect(reverse('product_single', args=[product_id]))

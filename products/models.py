@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-RATINGS = ((1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'))
+RATINGS = ((None, '0'), (1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'))
 
 
 class Category(models.Model):
