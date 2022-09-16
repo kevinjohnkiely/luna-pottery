@@ -119,7 +119,6 @@ def product_single(request, product_id):
         product.avg_rating = avg_rating
         product.save()
 
-
     context = {
         'product': product,
         'avg_rating': round(avg_rating, 2),

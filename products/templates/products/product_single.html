@@ -58,7 +58,7 @@
                 </p>
                 {% endif %}
 
-                <small class="text-muted"><strong>Average Rating: {{ avg_rating }}</strong></small>
+                <small class="text-muted"><i class="fas fa-star mr-1" style="color: #FFDE00"></i> {{ avg_rating }} / 5</small>
 
                 {% if user.is_authenticated %}
                 <form method="post" action="{% url 'add_rating' product.id %}">
@@ -129,17 +129,28 @@
     <div class="row">
         <div class="col-10 offset-1">
             <h3 class="text-center">Reviews</h3>
+            {% if reviews %}
+                {% for review in reviews %}
+                <div class="card mb-5">
+                    <div class="card-header bg-info text-white"><i class="fas fa-user fa-lg"></i> &nbsp; {{ review.user }}</div>
+                    <div class="card-body">{{ review.review_text }}</div>
+                    <div class="card-footer bg-info text-white text-right">Posted on {{ review.created_at }}</div>
+                  </div>
+                {% endfor %}
+            {% else %}
+            <p>No reviews yet! Add one below :)</p>
+            {% endif %}
+            <hr>
             {% if user.is_authenticated %}
             <form method="post">
                 {{ review_form | crispy }}
                 {% csrf_token %}
-                <button type="submit" class="btn btn-info rounded-2 btn-lg mt-3">Submit Review</button>
+                <div id="review_btn_holder">
+                    <button type="submit" class="btn btn-info rounded-2 btn-lg mt-3">Submit Review</button>
+                </div>
+                
             </form>
-            {% endif %}
-            <hr>
-            {% for review in reviews %}
-            <div>{{ review.review_text }}</div>
-            {% endfor %}
+            {% endif %}            
         </div>
     </div>
 
