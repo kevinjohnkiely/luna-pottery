@@ -166,7 +166,17 @@ def add_to_wishlist(request, product_id):
 
 def add_product(request):
     """ Add a product to the store """
-    form = ProductForm()
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully added the product!')
+            return redirect(reverse('add_product'))
+        else:
+            messages.error(request, 'Error adding the product. Please ensure the form is valid.')
+    else:
+        form = ProductForm()
+        
     template = 'products/add_product.html'
     context = {
         'form': form,
