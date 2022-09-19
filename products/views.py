@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.db.models import Q
 from django.db.models.functions import Lower
 from .models import Product, Category, Rating, Review, Wishlist
-from .forms import RatingForm, ReviewForm
+from .forms import RatingForm, ReviewForm, ProductForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -162,3 +162,14 @@ def add_to_wishlist(request, product_id):
     messages.info(request, f'You added {product.name} to your wishlist!')
 
     return HttpResponseRedirect(reverse('product_single', args=[product_id]))
+
+
+def add_product(request):
+    """ Add a product to the store """
+    form = ProductForm()
+    template = 'products/add_product.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
