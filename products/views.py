@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
 from .models import Product, Category, Rating, Review, Wishlist
@@ -132,6 +133,7 @@ def product_single(request, product_id):
     return render(request, 'products/product_single.html', context)
 
 
+@login_required
 def add_rating(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     user = request.user
@@ -150,6 +152,7 @@ def add_rating(request, product_id):
     return HttpResponseRedirect(reverse('product_single', args=[product_id]))
 
 
+@login_required
 def add_to_wishlist(request, product_id):
 
     product = get_object_or_404(Product, pk=product_id)
@@ -164,14 +167,19 @@ def add_to_wishlist(request, product_id):
     return HttpResponseRedirect(reverse('product_single', args=[product_id]))
 
 
+@login_required
 def add_product(request):
     """ Add a product to the store """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only superuser is allowed to do this')
+        return redirect(reverse('welcome'))
+
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            product = form.save()
             messages.success(request, 'Successfully added the product!')
-            return redirect(reverse('add_product'))
+            return redirect(reverse('product_single', args=[product.id]))
         else:
             messages.error(request, 'Error adding the product. Please ensure the form is valid.')
     else:
@@ -185,8 +193,13 @@ def add_product(request):
     return render(request, template, context)
 
 
+@login_required
 def update_product(request, product_id):
     """ Update a products details """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only superuser is allowed to do this')
+        return redirect(reverse('welcome'))
+
     product = get_object_or_404(Product, pk=product_id)
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
@@ -207,3 +220,16 @@ def update_product(request, product_id):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def delete_product(request, product_id):
+    """ Delete a product from the backend """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only superuser is allowed to do this')
+        return redirect(reverse('welcome'))
+
+    product = get_object_or_404(Product, pk=product_id)
+    product.delete()
+    messages.success(request, 'Product successfully deleted!')
+    return redirect(reverse('products'))

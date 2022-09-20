@@ -91,10 +91,16 @@
                                     </p>
                                     {% endif %}
                                     {% if product.avg_rating %}
-                                    <small class="text-muted"><i class="fas fa-star mr-1" style="color: #FFDE00"></i>{{ product.avg_rating }} /
+                                        <small class="text-muted"><i class="fas fa-star mr-1" style="color: #FFDE00"></i>{{ product.avg_rating }} /
                                         5</small>
                                     {% else %}
-                                    <small class="text-muted">No Rating</small>
+                                        <small class="text-muted">No Rating</small>
+                                    {% endif %}
+                                    {% if request.user.is_superuser %}
+                                        <small class="ml-3">
+                                            <a href="{% url 'update_product' product.id %}">Edit</a> | 
+                                            <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+                                        </small>
                                     {% endif %}
                                 </div>
                             </div>
