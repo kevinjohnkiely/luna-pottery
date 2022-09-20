@@ -78,6 +78,7 @@
                                 </div>
                             </form>
                             <a class="update-link text-info"><small>Update</small></a>
+                            <span class="qty-error-info bg-danger text-white p-2">NOT ENOUGH STOCK!</span>
                             <a class="remove-item text-danger float-right"
                                 id="remove_{{ item.item_id }}"><small>Remove</small></a>
 
@@ -136,22 +137,22 @@
 <script type="text/javascript">
     // Prevent user from manually selecting a value higher 
     // than what is in stock for this product
+    $('.qty-error-info').hide()
 
-    var allQtyInputs = $('.qty_input');
+    $('.qty_input').change(function(e) {
+        var x = parseInt($(this).val())
+        var y = parseInt($(this).attr("max"))
+        if (x > y) {
+            $('.update-link').hide()
+            $('.qty-error-info').show()
+        } else {
+            $('.update-link').show()
+            $('.qty-error-info').hide()
+        }
+    })
     
-
     // Update quantity on click
     $('.update-link').click(function (e) {
-        alert (allQtyInputs[0].value)
-        alert (allQtyInputs[0].max)
-
-        // BUGHERE - did not initialize these variables
-        var inputVal = allQtyInputs[0].value
-        var qtyMax = allQtyInputs[0].max
-
-        if(inputVal > qtyMax) {
-            allQtyInputs[0].value = allQtyInputs[0].max
-        }
         var form = $(this).prev('.update-form');
         form.submit();
     })
