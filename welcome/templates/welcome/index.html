@@ -41,8 +41,11 @@
     <div class="col">
       <h2 class="text-center my-5">About Luna Pottery</h2>
       <div class="mx-auto" style="width: 80%">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem facilis eum, rem laboriosam
-          voluptatem ratione enim ad expedita dolores culpa accusamus natus!</p>
+        <p>Welcome to Luna Pottery, located near Adare in County Limerick, Ireland. We hope you will enjoy
+          your visit to our website and please enjoy browsing our products. We are adding more items to stock
+          all the time, if any item is out of stock, please get in touch at <a href="mailto:kk77@lunapottery.com">Luna
+            Admin</a>
+        </p>
       </div>
     </div>
   </div>
@@ -51,18 +54,26 @@
     <div class="col-10 offset-1">
       <div class="card-deck">
         <div class="card">
-          <img class="card-img-top" src="{% static 'call_to_action/homepot1.jpg' %}" alt="Card image cap">
+          <a href="{% url 'products' %}">
+            <img class="card-img-top" src="{% static 'call_to_action/homepot1.jpg' %}" alt="Card image cap">
+          </a>
           <div class="card-body">
             <h5 class="card-title">Browse Our Ceramics</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text">Have a look at our full catalogue of ceramic products, ranging from everyday
+              homeware, to one-off artistic pieces. We have something for everyone!
+            </p>
             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
           </div>
         </div>
         <div class="card">
-          <img class="card-img-top" src="{% static 'call_to_action/homepot2.jpg' %}" alt="Card image cap">
+          <a href="{% url 'products'%}?category=pottery_classes">
+            <img class="card-img-top" src="{% static 'call_to_action/homepot2.jpg' %}" alt="Card image cap"></a>
           <div class="card-body">
             <h5 class="card-title">Reserve a Lesson</h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            <p class="card-text">Would you like to try your hand at the pottery wheel? Or perhaps make something
+              simpler with some slab or coil building techniques? Luna Pottery has monthly classes with capacity
+              for 10 students. Please check out our available classes and reserve a lesson!
+            </p>
             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
           </div>
         </div>

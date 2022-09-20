@@ -66,7 +66,7 @@
                 <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                     <div class="card h-100 border-4 mb-2">
                         {% if product.in_stock_amount == 0 %}
-                            <span class="bg-danger p-2 text-white">SOLD OUT!</span>
+                            <span class="bg-danger p-2 text-white"><strong>SOLD OUT!</strong></span>
                         {% elif product.in_stock_amount < 5 %}
                             <span class="bg-warning p-2 text-white">Only {{ product.in_stock_amount }} left in stock!</span>
                         {% elif product.in_stock_amount > 5 %}
@@ -98,8 +98,8 @@
                                         </a>
                                     </p>
                                     {% endif %}
-                                    {% if product.avg_rating %}
-                                        <small class="text-muted"><i class="fas fa-star mr-1" style="color: #FFDE00"></i>{{ product.avg_rating }} /
+                                    {% if product.rating %}
+                                        <small class="text-muted"><i class="fas fa-star mr-1" style="color: #FFDE00"></i>{{ product.rating }} /
                                         5</small>
                                     {% else %}
                                         <small class="text-muted">No Rating</small>

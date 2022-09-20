@@ -9,7 +9,7 @@ class ProductAdmin(admin.ModelAdmin):
         'category',
         'price',
         'in_stock_amount',
-        'avg_rating',
+        'rating',
         'image',
     )
 

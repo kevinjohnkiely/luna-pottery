@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 {% if product.in_stock_amount == 0 %}
-                    <span class="bg-danger p-2 text-white">SOLD OUT!</span>
+                    <span class="bg-danger p-2 text-white"><strong>SOLD OUT!</strong></span>
                 {% elif product.in_stock_amount < 5 %}
                     <span class="bg-warning p-2 text-white">Only {{ product.in_stock_amount }} left in stock!</span>
                 {% elif product.in_stock_amount > 5 %}
@@ -63,7 +63,7 @@
                 </p>
                 {% endif %}
 
-                <small class="text-muted"><i class="fas fa-star mr-1" style="color: #FFDE00"></i> {{ avg_rating }} / 5</small>
+                <small class="text-muted"><i class="fas fa-star mr-1" style="color: #FFDE00"></i> {{ rating }} / 5</small>
 
                 {% if user.is_authenticated %}
                 <form method="post" action="{% url 'add_rating' product.id %}">

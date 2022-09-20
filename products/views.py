@@ -113,16 +113,16 @@ def product_single(request, product_id):
 
     if queryset_ratings:
         avg_rating = total_ratings / queryset_ratings.count()
-        product.avg_rating = avg_rating
+        product.rating = avg_rating
         product.save()
     else:
         avg_rating = 0
-        product.avg_rating = avg_rating
+        product.rating = avg_rating
         product.save()
 
     context = {
         'product': product,
-        'avg_rating': round(avg_rating, 2),
+        'rating': round(avg_rating, 2),
         'reviews': queryset_reviews,
         'rating_form': rating_form,
         'review_form': ReviewForm(),
