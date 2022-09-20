@@ -138,10 +138,18 @@
     // than what is in stock for this product
 
     var allQtyInputs = $('.qty_input');
+    
 
     // Update quantity on click
     $('.update-link').click(function (e) {
-        if(allQtyInputs[0].value > allQtyInputs[0].max) {
+        alert (allQtyInputs[0].value)
+        alert (allQtyInputs[0].max)
+
+        // BUGHERE - did not initialize these variables
+        var inputVal = allQtyInputs[0].value
+        var qtyMax = allQtyInputs[0].max
+
+        if(inputVal > qtyMax) {
             allQtyInputs[0].value = allQtyInputs[0].max
         }
         var form = $(this).prev('.update-form');

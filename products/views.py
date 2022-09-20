@@ -69,6 +69,16 @@ def product_single(request, product_id):
     rating_form = RatingForm(data=request.GET)
     user = request.user
 
+    # Logic to only allow user to add item to cart once (can update quantity on cart page)
+    in_cart = False
+    cart = request.session.get('cart', {})
+    the_ids = []
+    for item_id, qty in cart.items():
+        the_ids.append(int(item_id))
+
+    if product_id in the_ids:
+        print(product_id, 'is in cart')
+        in_cart = True
 
     # WISHLIST LOGIC
     wishlists = Wishlist.objects.filter(product=product_id)
@@ -127,6 +137,7 @@ def product_single(request, product_id):
         'rating_form': rating_form,
         'review_form': ReviewForm(),
         'rated_by_user': rated_by_user,
+        'in_cart': in_cart,
         'wishlisted': wishlisted
     }
 
