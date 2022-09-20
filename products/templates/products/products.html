@@ -65,6 +65,13 @@
 
                 <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                     <div class="card h-100 border-4 mb-2">
+                        {% if product.in_stock_amount == 0 %}
+                            <span class="bg-danger p-2 text-white">SOLD OUT!</span>
+                        {% elif product.in_stock_amount < 5 %}
+                            <span class="bg-warning p-2 text-white">Only {{ product.in_stock_amount }} left in stock!</span>
+                        {% elif product.in_stock_amount > 5 %}
+                            <span class="bg-success p-2 text-white">{{ product.in_stock_amount }} left in stock</span>
+                        {% endif %}
                         {% if product.image %}
                         <a href="{% url 'product_single' product.id %}">
                             <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
@@ -78,6 +85,7 @@
                         <div class="card-body pb-0">
                             <p class="mb-0 font-weight-bold">{{ product.name }}</p>
                         </div>
+                        
                         <div class="card-footer bg-white pt-0 border-0 text-left">
                             <div class="row">
                                 <div class="col">
@@ -105,6 +113,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
 

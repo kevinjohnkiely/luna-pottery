@@ -64,7 +64,7 @@
                                             </button>
                                         </div>
                                         <input class="form-control form-control-sm qty_input" type="number"
-                                            name="quantity" value="{{ item.quantity }}" min="1" max="99"
+                                            name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.product.in_stock_amount }}"
                                             data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
                                         <div class="input-group-append">
                                             <button class="increment-qty btn btn-sm btn-info rounded-0"
@@ -134,8 +134,16 @@
 {% include 'products/includes/qty_input_script.html' %}
 
 <script type="text/javascript">
+    // Prevent user from manually selecting a value higher 
+    // than what is in stock for this product
+
+    var allQtyInputs = $('.qty_input');
+
     // Update quantity on click
     $('.update-link').click(function (e) {
+        if(allQtyInputs[0].value > allQtyInputs[0].max) {
+            allQtyInputs[0].value = allQtyInputs[0].max
+        }
         var form = $(this).prev('.update-form');
         form.submit();
     })

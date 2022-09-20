@@ -142,6 +142,16 @@ def checkout_success(request, order_number):
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
 
+    # Logic to reduce stock amounts on purchase success
+    all_line_items = OrderLineItem.objects.all()
+    my_order_line_items = all_line_items.filter(order=order)
+
+    for line in my_order_line_items:
+        product = Product.objects.get(id=line.product.id)
+        new_stock_amount = product.in_stock_amount - line.quantity
+        product.in_stock_amount = new_stock_amount
+        product.save()
+        
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
         # Attach the user's profile to the order
