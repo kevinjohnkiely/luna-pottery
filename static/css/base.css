@@ -177,17 +177,34 @@ input[name='q']::placeholder {
     }
 
     .header-container {
-        padding-top: 164px;
+        padding-top: 183px;
     }
 }
 
 /* pad the top a bit when navbar is collapsed on mobile */
-@media (max-width: 991px) {
+@media (max-width: 991px) and (min-width: 681px) {
     .header-container {
         padding-top: 166px;
+        /* background-color: red; */
     }
 
     body {
         height: calc(100vh - 116px);
+        
+    }
+}
+
+@media (max-width: 680px) {
+    .header-container {
+        padding-top: 202px;
+        /* background-color: red; */
+    }
+}
+
+@media (max-width: 437px) {
+    #secondary-info-bar {
+        font-size: small;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }
