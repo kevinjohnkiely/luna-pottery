@@ -157,6 +157,12 @@ input[name='q']::placeholder {
     border-radius: 0;
 }
 
+#superuser-panel {
+    padding: 0.5rem;
+    margin-top: 2rem;
+    border: 2px dashed #dc3545;
+}
+
 /***** MEDIA QUERIES *****/
 
 /* Slightly larger container on xl screens */

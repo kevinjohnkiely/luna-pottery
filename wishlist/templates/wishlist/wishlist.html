@@ -21,7 +21,7 @@
             <div class="row">
                 {% if wishlist_products %}
                 {% for product in wishlist_products %}
-                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 my-2">
                     <div class="card h-100 border-4 mb-2">
                         {% if product.product.image %}
                         <a href="{% url 'product_single' product.product.id %}">
@@ -60,7 +60,7 @@
 
                 {% endfor %}
                 {% else %}
-                <p>NOthing yet</p>
+                <h4 class="text-center">Nothing in your wishlist yet!</h4>
                 {% endif %}
             </div>
         </div>

@@ -62,15 +62,14 @@
             </div>
             <div class="row">
                 {% for product in products %}
-
-                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                    <div class="card h-100 border-4 mb-2">
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 my-2">
+                    <div class="card">
                         {% if product.in_stock_amount == 0 %}
-                            <span class="bg-danger p-2 text-white"><strong>SOLD OUT!</strong></span>
+                        <span class="bg-danger p-2 text-white"><strong>SOLD OUT!</strong></span>
                         {% elif product.in_stock_amount < 5 %}
-                            <span class="bg-warning p-2 text-white">Only {{ product.in_stock_amount }} left in stock!</span>
+                        <span class="bg-warning p-2 text-white">Only {{ product.in_stock_amount }} left in stock!</span>
                         {% elif product.in_stock_amount > 5 %}
-                            <span class="bg-success p-2 text-white">{{ product.in_stock_amount }} left in stock</span>
+                        <span class="bg-success p-2 text-white">{{ product.in_stock_amount }} left in stock</span>
                         {% endif %}
                         {% if product.image %}
                         <a href="{% url 'product_single' product.id %}">
@@ -85,7 +84,7 @@
                         <div class="card-body pb-0">
                             <p class="mb-0 font-weight-bold">{{ product.name }}</p>
                         </div>
-                        
+
                         <div class="card-footer bg-white pt-0 border-0 text-left">
                             <div class="row">
                                 <div class="col">
@@ -99,21 +98,22 @@
                                     </p>
                                     {% endif %}
                                     {% if product.rating %}
-                                        <small class="text-muted"><i class="fas fa-star mr-1" style="color: #FFDE00"></i>{{ product.rating }} /
+                                    <small class="text-muted"><i class="fas fa-star mr-1"
+                                            style="color: #FFDE00"></i>{{ product.rating }} /
                                         5</small>
                                     {% else %}
-                                        <small class="text-muted">No Rating</small>
+                                    <small class="text-muted">No Rating</small>
                                     {% endif %}
                                     {% if request.user.is_superuser %}
-                                        <small class="ml-3">
-                                            <a href="{% url 'update_product' product.id %}">Edit</a> | 
-                                            <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
-                                        </small>
+                                    <small class="ml-3">
+                                        <a href="{% url 'update_product' product.id %}">Edit</a> |
+                                        <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+                                    </small>
                                     {% endif %}
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
 
@@ -132,33 +132,33 @@
 {% endblock %}
 
 {% block postloadjs %}
-    {{ block.super }}
-    <script type="text/javascript">
-		$('.btt-link').click(function(e) {
-			window.scrollTo(0,0)
-		})
-	</script>
-    
-    <script type="text/javascript">
-        $('#sort-selector').change(function() {
-            var selector = $(this);
-            var currentUrl = new URL(window.location);
+{{ block.super }}
+<script type="text/javascript">
+    $('.btt-link').click(function (e) {
+        window.scrollTo(0, 0)
+    })
+</script>
 
-            var selectedVal = selector.val();
-            if(selectedVal != "reset"){
-                var sort = selectedVal.split("_")[0];
-                var direction = selectedVal.split("_")[1];
+<script type="text/javascript">
+    $('#sort-selector').change(function () {
+        var selector = $(this);
+        var currentUrl = new URL(window.location);
 
-                currentUrl.searchParams.set("sort", sort);
-                currentUrl.searchParams.set("direction", direction);
+        var selectedVal = selector.val();
+        if (selectedVal != "reset") {
+            var sort = selectedVal.split("_")[0];
+            var direction = selectedVal.split("_")[1];
 
-                window.location.replace(currentUrl);
-            } else {
-                currentUrl.searchParams.delete("sort");
-                currentUrl.searchParams.delete("direction");
+            currentUrl.searchParams.set("sort", sort);
+            currentUrl.searchParams.set("direction", direction);
 
-                window.location.replace(currentUrl);
-            }
-        })
-    </script>
+            window.location.replace(currentUrl);
+        } else {
+            currentUrl.searchParams.delete("sort");
+            currentUrl.searchParams.delete("direction");
+
+            window.location.replace(currentUrl);
+        }
+    })
+</script>
 {% endblock %}
