@@ -1,14 +1,21 @@
 <li class="list-inline-item">
-    <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a href="{% url 'welcome' %}" class="nav-link navbar-logo-link d-block d-lg-none">
+        <h3 class="text-info my-0"><strong>LUNA</strong><i class="fas fa-moon moon-yellow"></i>Pottery</h3>
+    </a>
+</li>
+<li class="list-inline-item">
+    <a class="text-info nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
         <div class="text-center">
             <div><i class="fas fa-search fa-lg"></i></div>
-            <p class="my-0">Search</p>
+            <p class="my-0 d-none d-sm-block">Search</p>
         </div>
     </a>
     <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
         <form class="form" method="GET" action="{% url 'products' %}">
             <div class="input-group w-100">
-                <input class="form-control border border-black rounded-0" type="text" name="query" placeholder="Search our site">
+                <input class="form-control border border-black rounded-0" type="text" name="query"
+                    placeholder="Search our site">
                 <div class="input-group-append">
                     <button class="form-control form-control btn btn-info border border-black rounded-0" type="submit">
                         <span class="icon">
@@ -21,42 +28,45 @@
     </div>
 </li>
 <li class="list-inline-item">
-    <a class="text-black nav-link d-block d-lg-none" href="" id="mobile-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="text-info nav-link d-block d-lg-none" href="" id="mobile-search" 
+        aria-haspopup="true" aria-expanded="false">
         <div class="text-center">
             <div><i class="fas fa-heart fa-lg"></i></div>
-            <p class="my-0">Wishlist</p>
+            <p class="my-0 d-none d-sm-block">Wishlist</p>
         </div>
     </a>
 </li>
 <li class="list-inline-item dropdown">
-    <a class="text-black nav-link d-block d-lg-none" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="text-info nav-link d-block d-lg-none" href="#" id="user-options" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
         <div class="text-center">
             <div><i class="fas fa-user fa-lg"></i></div>
-            <p class="my-0">My Account</p>
+            <p class="my-0 d-none d-sm-block">My Account</p>
         </div>
     </a>
     <div class="dropdown-menu border-0" aria-labelledby="user-options">
         {% if request.user.is_authenticated %}
-            {% if request.user.is_superuser %}
-                <a href="{% url 'add_product' %}" class="dropdown-item">Manage Products</a>
-            {% endif %}
-            <a href="" class="dropdown-item">My Profile</a>
-            <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+        {% if request.user.is_superuser %}
+        <a href="{% url 'add_product' %}" class="dropdown-item">Manage Products</a>
+        {% endif %}
+        <a href="" class="dropdown-item">My Profile</a>
+        <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
         {% else %}
-            <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-            <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+        <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+        <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
         {% endif %}
     </div>
 </li>
 <li class="list-inline-item">
-    <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-lg-none" href="{% url 'view_cart' %}">
+    <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-info{% endif %} nav-link d-block d-lg-none"
+        href="{% url 'view_cart' %}">
         <div class="text-center">
             <div><i class="fas fa-shopping-bag fa-lg"></i></div>
             <p class="my-0">
                 {% if grand_total %}
-                    ${{ grand_total|floatformat:2 }}
+                ${{ grand_total|floatformat:2 }}
                 {% else %}
-                    $0.00
+                $0.00
                 {% endif %}
             </p>
         </div>
