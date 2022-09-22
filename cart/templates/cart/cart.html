@@ -38,9 +38,9 @@
                     <tr>
                         <td class="p-3 w-25">
                             {% if item.product.image %}
-                                <img class="img-fluid rounded" src="{{ item.product.image.url }}">
+                            <img class="img-fluid rounded" src="{{ item.product.image.url }}">
                             {% else %}
-                                <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png">
+                            <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png">
                             {% endif %}
                         </td>
                         <td class="py-3">
@@ -65,8 +65,9 @@
                                             </button>
                                         </div>
                                         <input class="form-control form-control-sm qty_input" type="number"
-                                            name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.product.in_stock_amount }}"
-                                            data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
+                                            name="quantity" value="{{ item.quantity }}" min="1"
+                                            max="{{ item.product.in_stock_amount }}" data-item_id="{{ item.item_id }}"
+                                            id="id_qty_{{ item.item_id }}">
                                         <div class="input-group-append">
                                             <button class="increment-qty btn btn-sm btn-info rounded-0"
                                                 data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
@@ -78,8 +79,9 @@
                                     </div>
                                 </div>
                             </form>
-                            <a class="text-info" id="update-link-{{ item.item_id }}"><small>Update</small></a>
-                            <span class="bg-danger text-white p-2" id="qty-error-info-{{ item.item_id }}">NOT ENOUGH STOCK!</span>
+                            <a class="text-info update-link-{{ item.item_id }}" style="cursor: pointer;"><small>Update</small></a>
+                            <span class="bg-danger text-white p-2 qty-error-info-{{ item.item_id }}">NOT ENOUGH
+                                STOCK!</span>
                             <a class="remove-item text-danger float-right"
                                 id="remove_{{ item.item_id }}"><small>Remove</small></a>
 
@@ -133,13 +135,13 @@
                     <tr>
                         <td class="p-3" rowspan="2" style="width: 50%">
                             {% if item.product.image %}
-                                <img class="img-fluid rounded" src="{{ item.product.image.url }}">
+                            <img class="img-fluid rounded" src="{{ item.product.image.url }}">
                             {% else %}
-                                <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png">
+                            <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png">
                             {% endif %}
-                            
+
                         </td>
-                        
+
                     </tr>
                     <tr>
                         <td class="py-3">
@@ -157,8 +159,9 @@
                                             </button>
                                         </div>
                                         <input class="form-control form-control-sm qty_input" type="number"
-                                            name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.product.in_stock_amount }}"
-                                            data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
+                                            name="quantity" value="{{ item.quantity }}" min="1"
+                                            max="{{ item.product.in_stock_amount }}" data-item_id="{{ item.item_id }}"
+                                            id="id_qty_{{ item.item_id }}">
                                         <div class="input-group-append">
                                             <button class="increment-qty btn btn-sm btn-info rounded-0"
                                                 data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
@@ -170,11 +173,13 @@
                                     </div>
                                 </div>
                             </form>
-                            <a class="update-link text-info"><small>Update</small></a>
-                            <span class="qty-error-info bg-danger text-white p-2">NOT ENOUGH STOCK!</span>
+                            <a class="update-link-{{ item.item_id }} text-info" style="cursor: pointer;"><small>Update</small></a>
+                            <span class="qty-error-info-{{ item.item_id }} bg-danger text-white p-2">NOT ENOUGH
+                                STOCK!</span>
                             <a class="remove-item text-danger float-right"
                                 id="remove_{{ item.item_id }}"><small>Remove</small></a>
-                            <p class="mt-3"><strong>Item Subtotal: ${{ item.product.price | calculate_subtotal:item.quantity  }}</strong></p>
+                            <p class="mt-3"><strong>Item Subtotal:
+                                    ${{ item.product.price | calculate_subtotal:item.quantity  }}</strong></p>
                         </td>
                     </tr>
                     <tr>
@@ -233,30 +238,32 @@
     // Prevent user from manually selecting a value higher than what is in stock for this product
 
     // If more than 50 products in store, this loop needs to be increased, not perfect solution but a fix
-    for(x=0; x<=50; x++){
-        $('#qty-error-info-' + x).hide()
+    for (x = 0; x <= 50; x++) {
+        $('.qty-error-info-' + x).hide()
     }
-    
-    $('.qty_input').change(function(e) {
+
+    $('.qty_input').change(function (e) {
         // alert('changed')
         var id = $(this).data('item_id')
-    
+
         var x = parseInt($(this).val())
         var y = parseInt($(this).attr("max"))
         if (x > y) {
-            $('#update-link-' + id).hide()
-            $('#qty-error-info-' + id).show()
+            $('.update-link-' + id).hide()
+            $('.qty-error-info-' + id).show()
         } else {
-            $('#update-link-' + id).show()
-            $('#qty-error-info-' + id).hide()
+            $('.update-link-' + id).show()
+            $('.qty-error-info-' + id).hide()
         }
     })
-    
+
     // Update quantity on click
-    $('.update-link').click(function (e) {
-        var form = $(this).prev('.update-form');
-        form.submit();
-    })
+    for (x = 0; x <= 50; x++) {
+        $('.update-link-' + x).click(function (e) {
+            var form = $(this).prev('.update-form');
+            form.submit();
+        })
+    }
 
     // Remove item and reload on click
     $('.remove-item').click(function (e) {
