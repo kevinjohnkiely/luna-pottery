@@ -102,6 +102,7 @@ def product_single(request, product_id):
             review.product = product
             review.user = user
             review.save()
+            messages.info(request, f'You added a review on {product.name}!')
         else:
             review_form = ReviewForm()
 

@@ -126,7 +126,8 @@
         {% include 'includes/main-navbar.html' %}
       </nav>
     </div>
-    <div class="py-2 bg-info text-white text-center" id="secondary-info-bar">Welcome: {{  user.email  }} | 
+    <div class="py-2 bg-info text-white text-center" id="secondary-info-bar">
+      Welcome: {% if user.email %} {{  user.email  }} {% else %} Guest {% endif %} | 
       <strong>Free delivery on orders over €{{ free_delivery_threshold }}!</strong>
     </div>
   </header>

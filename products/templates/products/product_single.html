@@ -57,7 +57,7 @@
                         <p class="bg-success p-2 text-white">{{ product.in_stock_amount }} left in stock</p>
                         {% endif %}
                     </div>
-                    <div class="col">
+                    <div class="col" id="superuser-link">
                         <p class="lead mt-2 text-left font-weight-bold">€{{ product.price }}</p>
                     </div>
                 </div>
@@ -138,18 +138,43 @@
                                 </span>
                                 <span class="text-uppercase">Keep Shopping</span>
                             </a>
-                            {% if request.user.is_superuser %}
-                            <div id="superuser-panel">
-                                <strong>SUPERUSER ACTIONS: </strong>
-                                <a class="btn btn-warning" href="{% url 'update_product' product.id %}">Update</a>
-                                <a class="btn btn-danger" href="{% url 'delete_product' product.id %}">Delete</a>
-                            </div>
-                            {% endif %}
                         </div>
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
 
                     </div>
                 </form>
+                {% endif %}
+                {% if request.user.is_superuser %}
+                <div id="superuser-panel">
+                    <strong>SUPERUSER ACTIONS: </strong>
+                    <a class="btn btn-warning" href="{% url 'update_product' product.id %}">Update</a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                        Delete
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+                        aria-labelledby="deleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-danger">
+                                    <h5 class="modal-title text-white" id="deleteModalLabel">Delete Item</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true" class="text-white">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete <strong>{{ product.name }}</strong>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                    <!-- <button type="button" class="btn btn-danger">Yes, DELETE</button> -->
+                                    <a class="btn btn-danger" href="{% url 'delete_product' product.id %}">Yes, Delete!</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <a class="btn btn-danger" href="{% url 'delete_product' product.id %}">Delete</a> -->
+                </div>
                 {% endif %}
             </div>
         </div>
