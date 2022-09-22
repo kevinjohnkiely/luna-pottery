@@ -25,7 +25,8 @@
                     <div class="card h-100 border-4 mb-2">
                         {% if product.product.image %}
                         <a href="{% url 'product_single' product.product.id %}">
-                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}{{ product.product.image }}" alt="{{ product.name }}">
+                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}{{ product.product.image }}"
+                                alt="{{ product.name }}">
                         </a>
                         {% else %}
                         <a href="{% url 'product_single' product.id %}">
@@ -48,7 +49,8 @@
                                         </a>
                                     </p>
                                     {% endif %}
-                                    <form class="d-inline" action="{% url 'remove_from_wishlist' product.id %}" method="POST">
+                                    <form class="d-inline" action="{% url 'remove_from_wishlist' product.id %}"
+                                        method="POST">
                                         {% csrf_token %}
                                         <button class="btn btn-info" type="submit">DELETE</button>
                                     </form>
@@ -60,7 +62,18 @@
 
                 {% endfor %}
                 {% else %}
-                <h4 class="text-center">Nothing in your wishlist yet!</h4>
+                <div class="col my-2">
+                    <h4 class="text-center mx-auto">Nothing in your wishlist yet!</h4>
+                    <p class="text-center mx-auto">Please browse our ceramics and find some that you like.</p>
+
+                    <div class="d-flex justify-content-center">
+                        <a href="{% url 'products' %}" class="btn btn-outline-info rounded-0 btn-lg my-4 text-center">
+                            <span class="text-uppercase">SHOP FOR ITEMS</span>
+                        </a>
+                    </div>
+
+                </div>
+
                 {% endif %}
             </div>
         </div>
@@ -76,33 +89,33 @@
 {% endblock %}
 
 {% block postloadjs %}
-    {{ block.super }}
-    <script type="text/javascript">
-		$('.btt-link').click(function(e) {
-			window.scrollTo(0,0)
-		})
-	</script>
-    
-    <script type="text/javascript">
-        $('#sort-selector').change(function() {
-            var selector = $(this);
-            var currentUrl = new URL(window.location);
+{{ block.super }}
+<script type="text/javascript">
+    $('.btt-link').click(function (e) {
+        window.scrollTo(0, 0)
+    })
+</script>
 
-            var selectedVal = selector.val();
-            if(selectedVal != "reset"){
-                var sort = selectedVal.split("_")[0];
-                var direction = selectedVal.split("_")[1];
+<script type="text/javascript">
+    $('#sort-selector').change(function () {
+        var selector = $(this);
+        var currentUrl = new URL(window.location);
 
-                currentUrl.searchParams.set("sort", sort);
-                currentUrl.searchParams.set("direction", direction);
+        var selectedVal = selector.val();
+        if (selectedVal != "reset") {
+            var sort = selectedVal.split("_")[0];
+            var direction = selectedVal.split("_")[1];
 
-                window.location.replace(currentUrl);
-            } else {
-                currentUrl.searchParams.delete("sort");
-                currentUrl.searchParams.delete("direction");
+            currentUrl.searchParams.set("sort", sort);
+            currentUrl.searchParams.set("direction", direction);
 
-                window.location.replace(currentUrl);
-            }
-        })
-    </script>
+            window.location.replace(currentUrl);
+        } else {
+            currentUrl.searchParams.delete("sort");
+            currentUrl.searchParams.delete("direction");
+
+            window.location.replace(currentUrl);
+        }
+    })
+</script>
 {% endblock %}
