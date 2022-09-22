@@ -93,7 +93,7 @@
                 {% endif %}
                 {% endif %}
                 <p class="mt-3">{{ product.description }}</p>
-                <!-- form here to add product to bag -->
+                <!-- form here to add product to cart -->
                 {% if product.in_stock_amount > 0 %}
                 <form class="form" action="{% url 'add_to_cart' product.id %}" method="POST">
                     {% csrf_token %}

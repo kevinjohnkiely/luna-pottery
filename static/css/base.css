@@ -50,7 +50,7 @@ a.category-badge>span.badge:hover {
     z-index: 9999999;
 }
 
-.bag-notification-wrapper {
+.cart-notification-wrapper {
     height: 100px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -165,23 +165,8 @@ input[name='q']::placeholder {
 
 /***** MEDIA QUERIES *****/
 
-/* Slightly larger container on xl screens */
-@media (min-width: 1200px) {
-    .container {
-        /* max-width: 80%; */
-    }
-}
-
 /* fixed top navbar only on medium and up */
 @media (min-width: 992px) {
-    .fixed-top-desktop-only {
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 0;
-        z-index: 1111;
-    }
-
     .header-container {
         padding-top: 183px;
     }
@@ -191,7 +176,6 @@ input[name='q']::placeholder {
 @media (max-width: 991px) and (min-width: 681px) {
     .header-container {
         padding-top: 166px;
-        /* background-color: red; */
     }
 
     body {
@@ -203,7 +187,6 @@ input[name='q']::placeholder {
 @media (max-width: 680px) {
     .header-container {
         padding-top: 202px;
-        /* background-color: red; */
     }
 }
 

@@ -78,8 +78,8 @@
                                     </div>
                                 </div>
                             </form>
-                            <a class="update-link text-info"><small>Update</small></a>
-                            <span class="qty-error-info bg-danger text-white p-2">NOT ENOUGH STOCK!</span>
+                            <a class="text-info" id="update-link-{{ item.item_id }}"><small>Update</small></a>
+                            <span class="bg-danger text-white p-2" id="qty-error-info-{{ item.item_id }}">NOT ENOUGH STOCK!</span>
                             <a class="remove-item text-danger float-right"
                                 id="remove_{{ item.item_id }}"><small>Remove</small></a>
 
@@ -230,19 +230,25 @@
 {% include 'products/includes/qty_input_script.html' %}
 
 <script type="text/javascript">
-    // Prevent user from manually selecting a value higher 
-    // than what is in stock for this product
-    $('.qty-error-info').hide()
+    // Prevent user from manually selecting a value higher than what is in stock for this product
 
+    // If more than 50 products in store, this loop needs to be increased, not perfect solution but a fix
+    for(x=0; x<=50; x++){
+        $('#qty-error-info-' + x).hide()
+    }
+    
     $('.qty_input').change(function(e) {
+        // alert('changed')
+        var id = $(this).data('item_id')
+    
         var x = parseInt($(this).val())
         var y = parseInt($(this).attr("max"))
         if (x > y) {
-            $('.update-link').hide()
-            $('.qty-error-info').show()
+            $('#update-link-' + id).hide()
+            $('#qty-error-info-' + id).show()
         } else {
-            $('.update-link').show()
-            $('.qty-error-info').hide()
+            $('#update-link-' + id).show()
+            $('#qty-error-info-' + id).hide()
         }
     })
     
