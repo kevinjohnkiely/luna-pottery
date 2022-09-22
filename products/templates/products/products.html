@@ -66,7 +66,7 @@
                     <div class="card">
                         {% if product.in_stock_amount == 0 %}
                         <span class="bg-danger p-2 text-white"><strong>SOLD OUT!</strong></span>
-                        {% elif product.in_stock_amount < 5 %}
+                        {% elif product.in_stock_amount <= 5 %}
                         <span class="bg-warning p-2 text-white">Only {{ product.in_stock_amount }} left in stock!</span>
                         {% elif product.in_stock_amount > 5 %}
                         <span class="bg-success p-2 text-white">{{ product.in_stock_amount }} left in stock</span>
@@ -105,7 +105,7 @@
                                     <small class="text-muted">No Rating</small>
                                     {% endif %}
                                     {% if request.user.is_superuser %}
-                                    <small class="ml-3">
+                                    <small class="ml-3 float-right">
                                         <a class="btn btn-sm btn-danger" href="{% url 'product_single' product.id %}#superuser-link">Admin</a>
                                     </small>
                                     {% endif %}

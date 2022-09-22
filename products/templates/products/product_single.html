@@ -51,7 +51,7 @@
                     <div class="col">
                         {% if product.in_stock_amount == 0 %}
                         <p class="bg-danger p-2 text-white"><strong>SOLD OUT!</strong></p>
-                        {% elif product.in_stock_amount < 5 %}
+                        {% elif product.in_stock_amount <= 5 %}
                         <p class="bg-warning p-2 text-white">Only {{ product.in_stock_amount }} left in stock!</p>
                         {% elif product.in_stock_amount > 5 %}
                         <p class="bg-success p-2 text-white">{{ product.in_stock_amount }} left in stock</p>
@@ -163,10 +163,10 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    Are you sure you want to delete <strong>{{ product.name }}</strong>
+                                    Are you sure you want to delete <strong>{{ product.name }}?</strong>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
                                     <!-- <button type="button" class="btn btn-danger">Yes, DELETE</button> -->
                                     <a class="btn btn-danger" href="{% url 'delete_product' product.id %}">Yes, Delete!</a>
                                 </div>
