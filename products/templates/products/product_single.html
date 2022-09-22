@@ -138,14 +138,13 @@
                                 </span>
                                 <span class="text-uppercase">Keep Shopping</span>
                             </a>
+                            {% if request.user.is_superuser %}
                             <div id="superuser-panel">
                                 <strong>SUPERUSER ACTIONS: </strong>
-                                {% if request.user.is_superuser %}
                                 <a class="btn btn-warning" href="{% url 'update_product' product.id %}">Update</a>
                                 <a class="btn btn-danger" href="{% url 'delete_product' product.id %}">Delete</a>
-                               
-                                {% endif %}
                             </div>
+                            {% endif %}
                         </div>
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
 
