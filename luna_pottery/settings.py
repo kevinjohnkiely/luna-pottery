@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-s(r4uczsmdol_00_i2_5aa$kty_qbakg2^$7j4=zaq7ntfwcgi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['luna-pottery.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -121,19 +121,12 @@ CSRF_TRUSTED_ORIGINS = ['https://8000-kevinjohnki-lunapottery-dbge86i93ti.ws-eu6
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-# if "DATABASE_URL" in os.environ:
-#     DATABASES = {
-#         'default': dj_database_url.parse('postgres://bydautguzdijlc:bda52676988bc7d0af64907579f2d0760f075a912dea7fa4c28fcefde75e8215@ec2-54-228-125-183.eu-west-1.compute.amazonaws.com:5432/da8ju8pb7nn6i7')
-#     }
-# else:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': BASE_DIR / 'db.sqlite3',
-#         }
-#     }
-
-DATABASES = {
+if "DATABASE_URL" in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse('postgres://bydautguzdijlc:bda52676988bc7d0af64907579f2d0760f075a912dea7fa4c28fcefde75e8215@ec2-54-228-125-183.eu-west-1.compute.amazonaws.com:5432/da8ju8pb7nn6i7')
+    }
+else:
+    DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',

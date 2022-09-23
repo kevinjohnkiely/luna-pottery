@@ -1,0 +1,1 @@
+web: gunicorn luna_pottery.wsgi:application
