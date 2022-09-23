@@ -25,7 +25,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(default='Product Description')
     price = models.DecimalField(max_digits=5, decimal_places=2)
-    rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
+    rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True, default=0.0)
     in_stock_amount = models.IntegerField(null=True, blank=True, default=50)
     image_url = models.URLField(max_length=2000, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)

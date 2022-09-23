@@ -153,6 +153,8 @@ def add_rating(request, product_id):
 
     if rating_form.is_valid():
         rating = rating_form.save(commit=False)
+        if rating.rating is None:
+            rating.rating = 0
         rating.product = product
         rating.user = user
         rating.save()
