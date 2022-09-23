@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -114,17 +115,30 @@ LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'luna_pottery.wsgi.application'
-
+CSRF_TRUSTED_ORIGINS = ['https://8000-kevinjohnki-lunapottery-dbge86i93ti.ws-eu67.gitpod.io']
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
+# if "DATABASE_URL" in os.environ:
+#     DATABASES = {
+#         'default': dj_database_url.parse('postgres://bydautguzdijlc:bda52676988bc7d0af64907579f2d0760f075a912dea7fa4c28fcefde75e8215@ec2-54-228-125-183.eu-west-1.compute.amazonaws.com:5432/da8ju8pb7nn6i7')
+#     }
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
 
 
 # Password validation
