@@ -14,6 +14,10 @@ body {
     width: fit-content;
 }
 
+#logo-text {
+    font-size: 2rem;
+}
+
 .moon-yellow {
     color: #FFDE00;
 }

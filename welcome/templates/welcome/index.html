@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block page_header %}
-<div class="container header-container">
+<header class="container header-container">
   <div class="row">
-    <div class="col"></div>
+      <div class="col"></div>
   </div>
-</div>
+</header>
 {% endblock %}
 
 {% block content %}
@@ -16,13 +16,13 @@
       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="{% static 'slides/pot1.jpg' %}" class="d-block w-100" alt="...">
+            <img src="{% static 'slides/photo-of-colourful-ceramic-plates.jpg' %}" class="d-block w-100" alt="Luna Pottery Slideshow Ceramics Image">
           </div>
           <div class="carousel-item">
-            <img src="{% static 'slides/pot2.jpg' %}" class="d-block w-100" alt="...">
+            <img src="{% static 'slides/photo-of-potter-at-throwing-wheel-brown-clay.jpg' %}" class="d-block w-100" alt="Luna Pottery Slideshow Ceramics Image">
           </div>
           <div class="carousel-item">
-            <img src="{% static 'slides/pot3.jpg' %}" class="d-block w-100" alt="...">
+            <img src="{% static 'slides/photo-of-potter-at-throwing-wheel.jpg' %}" class="d-block w-100" alt="Luna Pottery Slideshow Ceramics Image">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
@@ -39,10 +39,11 @@
 
   <div class="row">
     <div class="col">
-      <h2 class="text-center my-4 my-sm-5">About Luna Pottery</h2>
+      <h1 class="text-center my-4 my-sm-5">Luna Pottery</h1>
+      <h2 class="text-center">Custom Made Ceramics & Pottery</h2>
       <div class="mx-auto" style="width: 80%">
         <p class="text-justify">Welcome to Luna Pottery, located near Adare in County Limerick, Ireland. We hope you will enjoy
-          your visit to our website and please enjoy browsing our products. We are adding more items to stock
+          your visit to our website and please enjoy browsing our <strong>ceramic products.</strong> We are adding more items to stock
           all the time, if any item is out of stock, please get in touch at <a href="mailto:kk77@lunapottery.com">Luna
             Admin</a>
         </p>
@@ -55,11 +56,11 @@
       <div class="card-deck">
         <div class="card mb-5 mb-sm-0">
           <a href="{% url 'products' %}">
-            <img class="card-img-top" src="{% static 'call_to_action/homepot1.jpg' %}" alt="Card image cap">
+            <img class="card-img-top" src="{% static 'call_to_action/photo-of-brown-pottery.jpg' %}" alt="Luna Pottery Ceramics - Photo of Brown Pottery">
           </a>
           <div class="card-body">
             <h5 class="card-title">Browse Our Ceramics</h5>
-            <p class="card-text">Have a look at our full catalogue of ceramic products, ranging from everyday
+            <p class="card-text">Have a look at our full catalogue of <strong>ceramic products</strong>, ranging from everyday
               homeware, to one-off artistic pieces. We have something for everyone!
             </p>
             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
@@ -67,11 +68,11 @@
         </div>
         <div class="card mb-5 mb-sm-0">
           <a href="{% url 'products'%}?category=pottery_classes">
-            <img class="card-img-top" src="{% static 'call_to_action/homepot2.jpg' %}" alt="Card image cap"></a>
+            <img class="card-img-top" src="{% static 'call_to_action/photo-of-pottery-teacher.jpg' %}" alt="Luna Pottery Classes - Photo of Pottery teacher"></a>
           <div class="card-body">
             <h5 class="card-title">Reserve a Lesson</h5>
             <p class="card-text">Would you like to try your hand at the pottery wheel? Or perhaps make something
-              simpler with some slab or coil building techniques? Luna Pottery has monthly classes with capacity
+              simpler with some slab or coil building techniques? Luna Pottery has monthly <strong>pottery classes</strong> with capacity
               for 10 students. Please check out our available classes and reserve a lesson!
             </p>
             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
