@@ -3,12 +3,13 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
 
-from .models import Order, OrderLineItem
-from products.models import Product
-from profiles.models import UserProfile
-
 import json
 import time
+
+from products.models import Product
+from profiles.models import UserProfile
+from .models import Order, OrderLineItem
+
 
 class StripeWH_Handler:
     """Handle Stripe webhooks"""
@@ -59,7 +60,6 @@ class StripeWH_Handler:
             if value == "":
                 shipping_details.address[field] = None
 
-        
         # Update profile information if save_info was checked
         profile = None
         username = intent.metadata.username
@@ -74,7 +74,6 @@ class StripeWH_Handler:
                 profile.default_street_address2 = shipping_details.address.line2
                 profile.default_county = shipping_details.address.state
                 profile.save()
-
 
         order_exists = False
         attempt = 1

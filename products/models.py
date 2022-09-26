@@ -5,7 +5,7 @@ RATINGS = ((None, '0'), (1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'))
 
 
 class Category(models.Model):
-
+    """ Class model for Category """
     class Meta:
         verbose_name_plural = 'Categories'
         
@@ -20,6 +20,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    """ Class model for Product """
     category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
     product_code = models.CharField(max_length=200, null=True, blank=True)
     name = models.CharField(max_length=200)
@@ -35,12 +36,14 @@ class Product(models.Model):
 
 
 class Rating(models.Model):
+    """ Class model for Rating """
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="products_rating")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="users_rating")
     rating = models.IntegerField(choices=RATINGS, null=True, blank=True)
 
 
 class Review(models.Model):
+    """ Class model for Review """
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="products_review")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="users_review")
     review_text = models.TextField(max_length=150)
@@ -48,5 +51,6 @@ class Review(models.Model):
 
 
 class Wishlist(models.Model):
+    """ Class model for Wishlist """
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="wishlist_product")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="wishlist_user")

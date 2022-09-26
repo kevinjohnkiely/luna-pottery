@@ -25,7 +25,7 @@ def add_to_cart(request, item_id):
         messages.success(request, f'You added {product.name} to the cart')
 
     request.session['cart'] = cart
-    
+
     return redirect(redirect_url)
 
 
@@ -44,7 +44,7 @@ def alter_cart(request, item_id):
         messages.success(request, f'Deleted {product.name} from your cart')
 
     request.session['cart'] = cart
-    
+
     return redirect(reverse('view_cart'))
 
 
@@ -59,7 +59,7 @@ def remove_from_cart(request, item_id):
 
         request.session['cart'] = cart
         return HttpResponse(status=200)
-        
+
     except Exception as e:
         messages.error(request, f'Error removing item: {e}')
         return HttpResponse(status=500)

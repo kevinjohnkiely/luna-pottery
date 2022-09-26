@@ -77,12 +77,10 @@ def product_single(request, product_id):
         the_ids.append(int(item_id))
 
     if product_id in the_ids:
-        print(product_id, 'is in cart')
         in_cart = True
 
     # WISHLIST LOGIC
     wishlists = Wishlist.objects.filter(product=product_id)
-    print(wishlists)
     user_wishlist = []
 
     for result in wishlists:
@@ -147,6 +145,7 @@ def product_single(request, product_id):
 
 @login_required
 def add_rating(request, product_id):
+    """ Method to add rating to product """
     product = get_object_or_404(Product, pk=product_id)
     user = request.user
     rating_form = RatingForm(data=request.POST)
@@ -168,7 +167,7 @@ def add_rating(request, product_id):
 
 @login_required
 def add_to_wishlist(request, product_id):
-
+    """ Method to add item to wishlist """
     product = get_object_or_404(Product, pk=product_id)
     user = request.user
 
