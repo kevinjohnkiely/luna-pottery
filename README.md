@@ -49,9 +49,15 @@ There are 2 classifications of user that can use this site, the Customer and the
 + [[#17](https://github.com/kevinjohnkiely/luna-pottery-project-5/issues/17)] Order Confirmation Email: The Customer can view a confirmation email, further confirming the order details are correct and completed
 + [[#26](https://github.com/kevinjohnkiely/luna-pottery-project-5/issues/26)] View Profile: The Customer can access their own unique user profile page by navigating to relevant link on navbar. Delivery details can be modified, or previous order details can be viewed here.
 
+### User Stories for Future Version
+There are a number of unrealised user stories that due to time constraints could not be completed for this application, but would be ideal improvements for future more expansive versions of the project:
++ [[#27](https://github.com/kevinjohnkiely/luna-pottery-project-5/issues/27)] Edit A Product Rating: The Customer could alter their previously chosen rating on a product.
++ [[#28](https://github.com/kevinjohnkiely/luna-pottery-project-5/issues/28)] Edit Product Review: The Customer could edit their review of a product
++ [[#29](https://github.com/kevinjohnkiely/luna-pottery-project-5/issues/29)] Delete Product Review: The Customer can delete the review of a product.
+
 
 ## Wireframes
-The following images show wireframes of the 2 primary designs of the application. These wireframes were created using Balsamiq Wireframes.
+The following images show wireframes of the 3 primary designs of the application. These wireframes were created using Balsamiq Wireframes.
 
 ### Wireframe of Home Page of Application
 This wireframe details the homepage of the site, showing the layout of a welcoming slideshow image of some pottery products, some welcome information text, and a couple of call-to-action panels allowing the customer to either view the products or book a pottery class.
@@ -68,9 +74,30 @@ This wireframe shows how an individual product page will look after selecting fr
 
 <img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/IndividualProduct.png">
 
+## Agile Methodology
+
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/agileboard.png">
+
+I used the Kanban board in Github to layout the Agile approach of this application. Each user story was submitted as an issue, and as I finished a sprint of work I then moved across the board from Todo, to In Progress, to Done as required. Some of the issues were flagged as Bugs, and returned to once these bugs were resolved. A number of undone features still remain in the Todo section, as they will be for a future version of the application. 
+
+The live link to the project board can be [viewed here.](https://github.com/users/kevinjohnkiely/projects/2)
+
 <hr>
 
 # System Design
 Once the system requirements from the Site Users perspective was finalized, a design of information flow was completed to demonstrate how the required data models were needed for the backend of this application. The following entity relationship (ER) diagram displays the relationship between the various data models.
 
 <img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/LunaPotteryERDiagram.png">
+
+## Entity Relationships
+The relationships between the data models in this application are as follows:
++ Product - Review (1 to Many): A Product can have many reviews
++ Product - Rating (1 to Many): A Product can have many ratings
++ Product - Wishlist (1 to Many): A Product can be added to many users wishlists
++ Category - Products (1 to Many): A Category can contain many Products
++ User - Review (1 to Many): A User can review many Products
++ User - Rating (1 to Many): A User can rate many Products
++ User - Wishlist (1 to Many): A User can add many Products to Wishlist
++ User - Order (1 to Many): A User can submit many Orders
++ Order - Order Line Item (1 to Many): An Order can have multiple Order Line Items
++ Order Line Item - Product (1 to 1): An Order Line Item can have just one Product
