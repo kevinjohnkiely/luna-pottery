@@ -76,7 +76,7 @@ This wireframe shows how an individual product page will look after selecting fr
 
 ## Agile Methodology
 
-<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/agileboard.png">
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/agileboard.jpg">
 
 I used the Kanban board in Github to layout the Agile approach of this application. Each user story was submitted as an issue, and as I finished a sprint of work I then moved across the board from Todo, to In Progress, to Done as required. Some of the issues were flagged as Bugs, and returned to once these bugs were resolved. A number of undone features still remain in the Todo section, as they will be for a future version of the application. 
 
