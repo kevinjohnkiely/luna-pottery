@@ -131,3 +131,11 @@ Underneath the slideshow and welcome text are 2 call-to-actions panels, designed
 ## The Products Page
 <img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/products.jpg">
 This view appears on either searching for a product, or by choosing one of the links on the bootstrap menu to filter or show all of the products. The products appear in a 4 column grid on large screens, with some basic information and the image acting as a link to the single product page with more information. Some stock information is also present, with some colour coded messages alerting the user if this item is either low in stock or sold out.
+
+## Single Product Page
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/single-product.jpg">
+This view is for an individual product selected by the customer. It shows all the information already shown from products page but also extra essential information such as description, and the ability to rate, review or add item to the cart. A comment panel also appears underneath is section if the user is logged in, the rating and wishlist buttons are also disabled if the user is not logged in. For the site admin user, an extra panel appears in dotted red outline, enabling the superuser to edit the product if needed.
+
+## Wishlist Page
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/wishlist.jpg">
+This view shows the items added to the wishlist by the user, following a similar design layout to the products page, with a 4 column grid layout on large screens. The customer can click on the blue DELETE button to remove item from wishlist.
