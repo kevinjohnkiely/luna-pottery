@@ -187,3 +187,12 @@ The following is a list of the various technologies employed to build this appli
 + Draw.io - Downloadable software to help create UX features such as user flow and ER Diagrams.
 + Stripe - Online payment processor to handle the payments for stock items.
 + AWS S3 - Cloud hosting platform used to store the product images.
+
+<hr>
+
+# Code Validation
+
+## HTML Validation
+I used the online validator at (https://validator.w3.org/) to check the HTML of the application. All of the applications frontend views were checked, with the same errors as follows appearing across all pages in the application:
+
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/html-errors.jpg">

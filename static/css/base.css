@@ -14,7 +14,7 @@ body {
     width: fit-content;
 }
 
-#logo-text {
+#logo-text, #logo-text-mobile {
     font-size: 2rem;
 }
 
