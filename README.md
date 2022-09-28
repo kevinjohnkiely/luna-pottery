@@ -101,3 +101,18 @@ The relationships between the data models in this application are as follows:
 + User - Order (1 to Many): A User can submit many Orders
 + Order - Order Line Item (1 to Many): An Order can have multiple Order Line Items
 + Order Line Item - Product (1 to 1): An Order Line Item can have just one Product
+
+<hr>
+
+# Application Features
+
+## Base Template
+The base template provides a structure to the application in that it holds the 2 main features of the application that are common to all views, the header and footer sections. A "base.html" file was created in Django to hold these elements, and also contain the various css and javascript links and files needed for inital loading of the application.
+
+### Header Section
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/header.jpg">
+The header section consists of 4 elements, a logo which stacks to the upper left, a search bar which appears on upper center, and an icon menu which stacks to upper right, which contains the links for logging in/out, wishlist and cart. Underneath this section there is a second row which houses the main bootstrap menu for the product, the various links allowing the user to search products by price, by category and so on. Just below the header section is an information bar, showing the current logged in users email and a message about free postage.
+
+### Footer Section
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/footer.jpg">
+The footer section is the location for 2 important social media aspects of the application, the facebook link in the left column, and the MailChimp signup form on the right. Underneath this in a separate row is some copyright information and a link to the Privacy Policy.
