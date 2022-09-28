@@ -121,33 +121,69 @@ The footer section is the location for 2 important social media aspects of the a
 This page is the landing page of the application, what the user first sees on login/signup. As well as the previously detailed header and footer, the homepage consists of the following features:
 
 ### Image Slideshow
-<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/slideshow.jpg">
+
 A visually engaging image slideshow of 3 pottery images to enhance the overall visually aspect of the application and showcase what kind of product is on offer. Some introductory text is placed underneath to welcome the user to the site and give a brief explanation of the business.
 
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/slideshow.jpg">
+
 ### Call to Action Panels
-<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/call-to-actions.jpg">
+
 Underneath the slideshow and welcome text are 2 call-to-actions panels, designed to further showcase the Potterys products. The panel on the left links to all the ceramic products, while the panel on the right links to the pottery classes that are on offer.
 
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/call-to-actions.jpg">
+
 ## The Products Page
-<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/products.jpg">
+
 This view appears on either searching for a product, or by choosing one of the links on the bootstrap menu to filter or show all of the products. The products appear in a 4 column grid on large screens, with some basic information and the image acting as a link to the single product page with more information. Some stock information is also present, with some colour coded messages alerting the user if this item is either low in stock or sold out.
 
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/products.jpg">
+
 ## Single Product Page
-<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/single-product.jpg">
+
 This view is for an individual product selected by the customer. It shows all the information already shown from products page but also extra essential information such as description, and the ability to rate, review or add item to the cart. A comment panel also appears underneath is section if the user is logged in, the rating and wishlist buttons are also disabled if the user is not logged in. For the site admin user, an extra panel appears in dotted red outline, enabling the superuser to edit the product if needed.
 
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/single-product.jpg">
+
 ## Wishlist Page
-<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/wishlist.jpg">
+
 This view shows the items added to the wishlist by the user, following a similar design layout to the products page, with a 4 column grid layout on large screens. The customer can click on the blue DELETE button to remove item from wishlist.
 
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/wishlist.jpg">
+
 ## Shopping Cart Page
-<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/cart.jpg">
+
 This page is the cart page that appears when the user has added items to the cart and navigated to it. Items appear in rows with option to change quantity before purchase. In the bottom row of this page are the totals, subtotals, and links to either continue shopping or to proceed to the Checkout page.
 
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/cart.jpg">
+
 ## Checkout Page
-<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/checkout.jpg">
+
 The customer is directed to this view once they click the checkout link in the cart page, and are presented with a summary of the items they are about to buy on the right side column, with a form on the left for entering delivery and payment details.
 
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/checkout.jpg">
+
 ## Profile Page
-<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/profile.jpg">
+
 This is the profile page view for each customer where they can update their delivery information using the form in the left column, or view their previous orders in the right hand column.
+
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/profile.jpg">
+
+<hr>
+
+# Technologies Used
+
+The following is a list of the various technologies employed to build this application
+
++ HTML5 - Hypertext markup language used to give the website its overall structure and semantic value.
++ CSS3 - Cascading Style Sheets used to apply consistent styles across all sections of the application.
++ Bootstrap 4.6.2 - CSS framework to assist in rapid site front end development.
++ Javascript/JQuery - Front end coding language used in a number of templates to provide specific functions.
++ Git/Gitpod - Gitpod used as development platform to build incremental versions of the application and Git commands to backup these changes to Github.
++ Heroku - Platform used for hosting the deployed application.
++ PostgreSQL - This was used as the database storage for the application, it was added as a Resource in the Heroku hosting platform settings.
++ Django - Python based web application framework used to build the application.
++ Font Awesome - Fontawesome toolkit imported into HTML files and its icons used to show button icons and logo.
++ Balsamiq Wireframes - Downloadable software to create the wireframe mockups.
++ Draw.io - Downloadable software to help create UX features such as user flow and ER Diagrams.
++ Stripe - Online payment processor to handle the payments for stock items.
++ AWS S3 - Cloud hosting platform used to store the product images.
