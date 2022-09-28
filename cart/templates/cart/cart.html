@@ -238,27 +238,26 @@
     // Prevent user from manually selecting a value higher than what is in stock for this product
 
     // If more than 50 products in store, this loop needs to be increased, not perfect solution but a fix
-    for (x = 0; x <= 50; x++) {
-        $('.qty-error-info-' + x).hide()
+    for (let x = 0; x <= 50; x++) {
+        $('.qty-error-info-' + x).hide();
     }
 
     $('.qty_input').change(function (e) {
-        // alert('changed')
-        var id = $(this).data('item_id')
+        var id = $(this).data('item_id');
 
-        var x = parseInt($(this).val())
-        var y = parseInt($(this).attr("max"))
+        var x = parseInt($(this).val());
+        var y = parseInt($(this).attr("max"));
         if (x > y) {
-            $('.update-link-' + id).hide()
-            $('.qty-error-info-' + id).show()
+            $('.update-link-' + id).hide();
+            $('.qty-error-info-' + id).show();
         } else {
-            $('.update-link-' + id).show()
-            $('.qty-error-info-' + id).hide()
+            $('.update-link-' + id).show();
+            $('.qty-error-info-' + id).hide();
         }
-    })
+    });
 
     // Update quantity on click
-    for (x = 0; x <= 50; x++) {
+    for (let x = 0; x <= 50; x++) {
         $('.update-link-' + x).click(function (e) {
             var form = $(this).prev('.update-form');
             form.submit();
@@ -278,6 +277,6 @@
             .done(function () {
                 location.reload();
             });
-    })
+    });
 </script>
 {% endblock %}

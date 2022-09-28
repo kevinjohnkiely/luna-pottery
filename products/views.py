@@ -5,13 +5,12 @@ from django.db.models import Q
 from django.db.models.functions import Lower
 from .models import Product, Category, Rating, Review, Wishlist
 from .forms import RatingForm, ReviewForm, ProductForm
-from django.contrib.auth.models import User
-from django.contrib import messages
 from django.http import HttpResponseRedirect
 
 
 def all_products(request):
-    """A view to render the list of products page, including sorting & searching"""
+    """A view to render the list of products page,
+    including sorting & searching"""
 
     products = Product.objects.all()
     query = None
@@ -69,7 +68,8 @@ def product_single(request, product_id):
     rating_form = RatingForm(data=request.GET)
     user = request.user
 
-    # Logic to only allow user to add item to cart once (can update quantity on cart page)
+    # Logic to only allow user to add item to cart once (can update quantity
+    # on cart page)
     in_cart = False
     cart = request.session.get('cart', {})
     the_ids = []
@@ -194,10 +194,11 @@ def add_product(request):
             messages.info(request, 'Successfully added the product!')
             return redirect(reverse('product_single', args=[product.id]))
         else:
-            messages.error(request, 'Error adding the product. Please ensure the form is valid.')
+            messages.error(request, 'Error adding the product.' +
+                           'Please ensure the form is valid.')
     else:
         form = ProductForm()
-        
+
     template = 'products/add_product.html'
     context = {
         'form': form,
@@ -221,7 +222,8 @@ def update_product(request, product_id):
             messages.info(request, 'Successfully updated product!')
             return redirect(reverse('product_single', args=[product.id]))
         else:
-            messages.error(request, 'Failed to update product. Please ensure the form is valid.')
+            messages.error(request, 'Failed to update product.' +
+                           'Please ensure the form is valid.')
     else:
         form = ProductForm(instance=product)
         messages.info(request, f'You are editing {product.name}')

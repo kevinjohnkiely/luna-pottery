@@ -59,14 +59,14 @@ def checkout(request):
             order.save()
             for item_id, qty in cart.items():
                 try:
-                    product = Product.objects.get(id=item_id)                    
+                    product = Product.objects.get(id=item_id)
                     order_line_item = OrderLineItem(
                         order=order,
                         product=product,
                         quantity=qty,
                     )
                     order_line_item.save()
-                    
+
                 except Product.DoesNotExist:
                     messages.error(request, (
                         "One of the products in your cart wasn't found in our database. "

@@ -8,7 +8,7 @@ class Category(models.Model):
     """ Class model for Category """
     class Meta:
         verbose_name_plural = 'Categories'
-        
+
     name = models.CharField(max_length=200)
     front_end_name = models.CharField(max_length=200, null=True, blank=True)
 
@@ -21,12 +21,14 @@ class Category(models.Model):
 
 class Product(models.Model):
     """ Class model for Product """
-    category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey('Category', null=True, blank=True,
+                                 on_delete=models.SET_NULL)
     product_code = models.CharField(max_length=200, null=True, blank=True)
     name = models.CharField(max_length=200)
     description = models.TextField(default='Product Description')
     price = models.DecimalField(max_digits=5, decimal_places=2)
-    rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True, default=0.0)
+    rating = models.DecimalField(max_digits=3, decimal_places=2, null=True,
+                                 blank=True, default=0.0)
     in_stock_amount = models.IntegerField(null=True, blank=True, default=50)
     image_url = models.URLField(max_length=2000, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
@@ -37,20 +39,26 @@ class Product(models.Model):
 
 class Rating(models.Model):
     """ Class model for Rating """
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="products_rating")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="users_rating")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                related_name="products_rating")
+    user = models.ForeignKey(User, on_delete=models.CASCADE,
+                             related_name="users_rating")
     rating = models.IntegerField(choices=RATINGS, null=True, blank=True)
 
 
 class Review(models.Model):
     """ Class model for Review """
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="products_review")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="users_review")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                related_name="products_review")
+    user = models.ForeignKey(User, on_delete=models.CASCADE,
+                             related_name="users_review")
     review_text = models.TextField(max_length=150)
     created_at = models.DateTimeField(auto_now_add=True)
 
 
 class Wishlist(models.Model):
     """ Class model for Wishlist """
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="wishlist_product")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="wishlist_user")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                related_name="wishlist_product")
+    user = models.ForeignKey(User, on_delete=models.CASCADE,
+                             related_name="wishlist_user")

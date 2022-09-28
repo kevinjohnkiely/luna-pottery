@@ -205,3 +205,30 @@ I used the online validator at (https://validator.w3.org/) to check the HTML of 
 After correcting these errors, I ran the site through validator again and it passed successfully:
 
 <img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/html-errors-fixed.jpg">
+
+## CSS Validation
+
+There was no need to test the Bootstrap supplied css of this project, however I used a custom css file to supplement these rules located at static/css/base.css. I used the online CSS Validator at (https://jigsaw.w3.org/css-validator) to test the CSS of the application, using the "by direct input" option to copy and paste in the CSS code. As seen below, no errors were reported in the custom CSS:
+
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/css-valid.jpg">
+
+## Javascript / JQuery Validation
+
+I used the online validator at (https://jshint.com/) to test the various JQuery code snippets that appear throughout the application. The results are as follows:
+
+### JQuery code in Cart.html page
++ WARNING: Functions declared within loops referencing an outer scoped variable may lead to confusing semantics. ($)
++ UNDEFINED VARIABLE: $
++ Missing semicolons
+
+The first warning refers to a loop which format I needed to leave as is, to acheive the functionality I required for the shopping cart to function properly, so I was prepared to note this warning but ignore on this occasion. The second warning refers to the $ symbol used by JQuery, and since this is necessary I was prepared to ignore similar warnings in future code snippets.
+
+### JQuery code in Products, Add Product and Update Product HTML pages
++ No warnings or errors
+
+### Javscript code in stripe_elements.js
++ Missing semicolons.
+
+A couple of warnings were supressed when I added the code /*jshint esversion: 6*/ at the top of the JSHint validator. These had to do with template literals which I use sparingly in my code.
+
+## Python Validation

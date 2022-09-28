@@ -1,10 +1,14 @@
+<a href="{% url 'welcome' %}" class="nav-link navbar-logo-link" id="logo-on-mobile">
+    <span class="text-info my-0" id="logo-text"><strong>LUNA</strong><i
+        class="fas fa-moon moon-yellow"></i>Pottery</span>
+</a>
 <menu>
-    <li class="list-inline-item">
+    <!-- <li class="list-inline-item">
         <a href="{% url 'welcome' %}" class="nav-link navbar-logo-link d-block d-lg-none">
             <span class="text-info my-0" id="logo-text-mobile"><strong>LUNA</strong><i
                     class="fas fa-moon moon-yellow"></i>Pottery</span>
         </a>
-    </li>
+    </li> -->
     <li class="list-inline-item">
         <a class="text-info nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -65,7 +69,7 @@
             href="{% url 'view_cart' %}">
             <div class="text-center">
                 <div><i class="fas fa-shopping-bag fa-lg"></i></div>
-                <p class="my-0">
+                <p class="my-0 d-none d-sm-block">
                     {% if grand_total %}
                     ${{ grand_total|floatformat:2 }}
                     {% else %}
