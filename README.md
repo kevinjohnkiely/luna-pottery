@@ -232,3 +232,8 @@ The first warning refers to a loop which format I needed to leave as is, to ache
 A couple of warnings were supressed when I added the code /*jshint esversion: 6*/ at the top of the JSHint validator. These had to do with template literals which I use sparingly in my code.
 
 ## Python Validation
+At the time of testing, the online Python validator at (http://pep8online.com/) was offline. As a result, I took a more hands-on approach to validating the python files in this application. In the gitpod development terminal I typed in the command "python3 -m flake8" which output a comprehensive list of how to improve the Python code:
+
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/flake-8.jpg">
+
+The above image shows a typical output from the flake8 command, the only errors showing up as "lines too long", and some unused imports which come from files that were automatically generated on application creation. I meticulously got rid of all the "line too long" issues, and as a result most of these errors now do not appear. In a few instances, the effort to break lines in 2 resulted in some bugs, so I accepted that some of these "line too long" errors were necessary to the overall working product.
