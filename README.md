@@ -139,3 +139,15 @@ This view is for an individual product selected by the customer. It shows all th
 ## Wishlist Page
 <img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/wishlist.jpg">
 This view shows the items added to the wishlist by the user, following a similar design layout to the products page, with a 4 column grid layout on large screens. The customer can click on the blue DELETE button to remove item from wishlist.
+
+## Shopping Cart Page
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/cart.jpg">
+This page is the cart page that appears when the user has added items to the cart and navigated to it. Items appear in rows with option to change quantity before purchase. In the bottom row of this page are the totals, subtotals, and links to either continue shopping or to proceed to the Checkout page.
+
+## Checkout Page
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/checkout.jpg">
+The customer is directed to this view once they click the checkout link in the cart page, and are presented with a summary of the items they are about to buy on the right side column, with a form on the left for entering delivery and payment details.
+
+## Profile Page
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/profile.jpg">
+This is the profile page view for each customer where they can update their delivery information using the form in the left column, or view their previous orders in the right hand column.
