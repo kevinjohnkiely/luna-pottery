@@ -116,3 +116,18 @@ The header section consists of 4 elements, a logo which stacks to the upper left
 ### Footer Section
 <img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/footer.jpg">
 The footer section is the location for 2 important social media aspects of the application, the facebook link in the left column, and the MailChimp signup form on the right. Underneath this in a separate row is some copyright information and a link to the Privacy Policy.
+
+## Welcome Page
+This page is the landing page of the application, what the user first sees on login/signup. As well as the previously detailed header and footer, the homepage consists of the following features:
+
+### Image Slideshow
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/slideshow.jpg">
+A visually engaging image slideshow of 3 pottery images to enhance the overall visually aspect of the application and showcase what kind of product is on offer. Some introductory text is placed underneath to welcome the user to the site and give a brief explanation of the business.
+
+### Call to Action Panels
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/call-to-actions.jpg">
+Underneath the slideshow and welcome text are 2 call-to-actions panels, designed to further showcase the Potterys products. The panel on the left links to all the ceramic products, while the panel on the right links to the pottery classes that are on offer.
+
+## The Products Page
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/products.jpg">
+This view appears on either searching for a product, or by choosing one of the links on the bootstrap menu to filter or show all of the products. The products appear in a 4 column grid on large screens, with some basic information and the image acting as a link to the single product page with more information. Some stock information is also present, with some colour coded messages alerting the user if this item is either low in stock or sold out.
