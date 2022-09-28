@@ -196,3 +196,12 @@ The following is a list of the various technologies employed to build this appli
 I used the online validator at (https://validator.w3.org/) to check the HTML of the application. All of the applications frontend views were checked, with the same errors as follows appearing across all pages in the application:
 
 <img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/html-errors.jpg">
+
++ Error no.1 was corrected by adding a semantic <menu> tag to enclose the list items.
++ Errors no.2 and 3 were solved by changing the ID of "logo-text" to "logo-text-mobile" on the mobile menu HTML section
++ Error no.8 and 9 were corrected by deleting the width and height attributes of the images in question. Width and height is determined by Bootstrap grid and screen size, thus these sizes are not needed on the img tag.
++ A non fatal warning error also appeared, saying that the type attribute of a Javascript tag is not needed, so these tags were replaced as script tags with the src attribute only required.
+
+After correcting these errors, I ran the site through validator again and it passed successfully:
+
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/html-errors-fixed.jpg">
