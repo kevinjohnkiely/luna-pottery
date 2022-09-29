@@ -168,6 +168,12 @@ This is the profile page view for each customer where they can update their deli
 
 <img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/profile.jpg">
 
+## Message Alerts
+
+A message alert box pops up at the top right of the screen, or center of screen on mobile devices, which give feedback on actions just performed by the user, such as adding items to cart, or rating/reviewing an item. The popup box is closed by clicking on the X button.
+
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/features/messages.jpg">
+
 <hr>
 
 # Technologies Used
@@ -237,3 +243,50 @@ At the time of testing, the online Python validator at (http://pep8online.com/) 
 <img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/flake-8.jpg">
 
 The above image shows a typical output from the flake8 command, the only errors showing up as "lines too long", and some unused imports which come from files that were automatically generated on application creation. I meticulously got rid of all the "line too long" issues, and as a result most of these errors now do not appear. In a few instances, the effort to break lines in 2 resulted in some bugs, so I accepted that some of these "line too long" errors were necessary to the overall working product.
+
+<hr>
+
+# Testing
+
+## Cross Browser Testing
+The application was functionally tested across the 3 web browsers, Google Chrome, Microsoft Edge & Mozilla Firefox. The site loaded consistently across all 3 and no issues were detected on any browser.
+
+## Compatibility Testing
+I tested the site across different devices, such as the Nokia 4.2 smartphone with Android 11, Lenovo Ideapad 3 laptop with different browsers on Windows 11, and on a Dell Studio laptop with different browsers on a Linux Mint operating system. No issues were reported between these devices.
+
+## Responsiveness Testing
+I tested this application both during and after development on multiple screen sizes using Google Chromes Developer Tools to ensure that all elements scaled correctly across all viewports. The Bootstrap framework helped a great deal in ensuring a responsive application, but I also had to introduce some of my own CSS rules within Media Queries in the custom CSS file, for any edge cases. The responsiveness testing produced the following results:
+
+### One column layouts
+All sections of the application with just one Bootstrap column display as expected across all screen sizes as no stacking or moving of the rows or columns are needed. Some margin or padding values may have had to be altered to suit the screen size. As a result, sections like the homepage slideshow, introductory text, product comment form/reviews, and the login/register page are consistent on all devices.
+
+### The header section
++ On medium and smaller screen sizes, the Bootstrap menu changes to a burger icon and dropdown menu items, as is default on a Bootstrap template. Also, the search box disappears and is replaced instead by a search icon which joins the other icon menu, and generates a drop down search box.
++ On Smaller screen sizes, as the screen gets smaller, the Bootstrap burger button and Site Logo stack beside each other, and underneath the icon menu appears on the next row.
++ On extra small screen sizes, paddings and margins are adjusted and also so save space, the text values of the icon menu items are hidden, leaving just the icons, which are self-explanatory on their own.
+
+### The Products/Search Results/Wishlist Pages
++ The products are displayed in a 4 column grid on larger screen sizes, and as the screen size reduces, the columns become 3, 2 and finally a one column layout for extra small screens. All relevant product information is still visible.
++ The page heading text, the sorting box and the product amount text all stack vertically on extra small screens.
+
+### The Single Product Page
++ This layout moves from a 2 column layout on large and medium screens, to a one column grid on smaller screens, with the image appearing on top and the product information and cart buttons appearing underneath.
++ The second row on small screens with the information and buttons needed to be adjusted with paddings and margins, as the default layout that appeared on smaller screens looked inconsistent and messy.
+
+### The Cart Page
++ On large and medium screens, the tabular format of the cart page displays well, just slightly resizing its table cell widths as the screen size reduced.
++ This layout needed a lot of adjustments for smaller screens. The table layout did not scale well on small screens, everything was too tightly packed with some information not even viewable without scrolling sideways. I decided to create a different table layout with some colspans and rowspans attributes to get the desired result.
++ The cart details HTML table was hidden on smaller screens, and the alternative mobile HTML table was hidden on larger screens. A lot of extra code, but was the solution I chose to make this part of application responsive.
+
+### The Checkout Page
++ This page was another example of a 2 column grid becoming a one column layout on medium and small screen sizes.
++ On small devices, the form for entering delivery and payment details appear first, with the cart details summary appearing below. Some necessary paddings and margins needed adjustment to suit the viewport.
+
+### The Profile Page
++ Again this appeared as a 2 column layout on larger screens
++ On smaller to medium screen sizes, the form for changing delivery details appeared in the top row, with the order history details appearing below.
+
+### The Page Footer
++ On large screens the footer was a 2 column layout, with the facebook link to the left and the Mailchimp signup form to the right.
++ Once the viewport switched to medium/small screen sizes, this layout changed to a one column grid, with the Mailchimp form appearing on the second row.
++ The Mailchimp form and section needed some custom CSS to fit the overall site theme. This needed some time to fix as this section came with its own image and css, so I needed to make it look as I wished. The Mailchimp logo needed to be resized for extra small screen sizes.
