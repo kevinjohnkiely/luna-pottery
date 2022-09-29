@@ -309,3 +309,55 @@ Obviously the Accessibilty was the most urgent in need of improving so I set to 
 Once I created these fixes, I noticed that the scores for Performance and SEO improved slightly also. I further improved these by reducing the quality on some of the slideshow images for Performance, and added a Meta Description tag to improve SEO. Overall I am much happier with the following scores:
 
 <img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/lighthouse-after.jpg">
+
+## User Testing - MANUAL
+
+In order to verify that this application was working correctly, I wanted to thoroughly test all user journeys manually, 21 of which would be undertaken by the Customer, 3 of which by the Admin user. I asked a friend to stand in as the Customer User, and I would personally test the Admin actions.
+
+1. Create New Account - Test User had no issues signing up for account. Because I did not want the user to supply their personal email for this process, I created a fake email at (https://temp-mail.org/en/) for testing purposes. Once the user informed me that she had signed up and received a notifcation on screen that their email had to be verified, I checked this temp email inbox.
+
+2. Receive Account Signup Email - From the previous user story, I copied and pasted the verification link, and returned this to the test user. She was able to click this link and was forwarded back to the live application where she saw the message that her email was now verified.
+
+3. Recover Password - This process worked perfectly for the test user, using the same temp email from the previous user journey. User was able to reset password and log back in to the application.
+
+4. Login / Logout - Test User was able to login and logout correctly. I asked the User to enter invalid details on login form, and the required error messages clearly appeared. User was happy with login/logout process.
+
+5. Product Search - Test User found the product search bar very quickly on the desktop screen, but took a little longer to find on mobile due to the different layout. I decided this slight delay wasn't enough to influence a re-design of that section. I asked the user to enter the keyword "clay" in the test and also a keyword of their choice, and the 4 expected pottery items appeared below in page.
+
+6. View List of Products - User reported that it was quite easy to find a list of all available products, finding the 'All Products' dropdown menu and find the desired link beneath. Again, it took slightly longer on the Bootstrap mobile menu, but was again easy to find.
+
+7. Sort List of Products - Test User found it easy to sort the products, and commented that it was extra helpful to have 2 methods to achieve this, both by using the links in the Bootstrap menu, and also the dropdown list box above the product list.
+
+8. View Single Product - Test User was asked to choose to view a single product details, and they found it easy to click on the image to do this. They commented that it was best to have the link on the image as this was the largest item to click and thus the easiest to do promptly. User also commented that it was very useful to have the stock quantities available and more importantly, the colour coded messages about stock running low or being empty.
+
+9. Comment on Product - I asked the Test User to try give a product a review without any instructions as to how to do it. They found it easy to do, however they commented that perhaps a link should appear near top of the product page nearby the rating or wishlist buttons, that would then scroll the page down to the comment form, as it doesnt appear when the page loads. I considered this, but already found that area of page too cluttered with items, so was happy to leave page as is.
+
+10. Add Product to Wishlist - Test User was easily able to add item to their wishlist by clicking the heart icon, although commented that the icon could be a little larger. They commented that the popup notification message at top right hand corner was a nice touch.
+
+11. View Wishlist - The Test User was quickly and easily able to find their own wishlisted items by clicking the icon in the navbar. They commented that this was very clearly labelled and easy to find.
+
+12. Remove from Wishlist - The User found it very easy to remove items from wishlist by simply clicking delete buttons underneath each. Again they commented in positive terms about this section.
+
+13. Rate a Product - The Test User found it quite easy to rate a piece, and commented that it was also useful to have the small text message 'You rated this product' appear where the rating form used to be, to inform the user that they have already rated the piece they are viewing.
+
+14. Add to Cart - Test User was easily able to find how to add items to the cart, and specify a change of quantity before doing so. Again user was pleased to see popup message verifying what they just completed.
+
+15. View Cart Items - The Test User reported that it was very clear what the shopping cart icon in the icons menu navbar was meant to portray, and clicking on it would take the user to the shopping cart page as expected.
+
+16. Edit Cart Contents - This test threw up some errors that I had to fix. The Test User was easily able to delete items from their cart page, and also use the +/- icon buttons to change and update quantities. However, I asked the user to manually add a number into the quantity box that was greater than the amount remaining in stock, and this was still possible. This obviously was an error that I had to fix, and did so with some extra JQuery code in the cart page template. Now, if the user adds too large a number, a red warning box will appear instead of the update quantity link, thus they will not be able to proceed to add a quantity that is greater than stock amounts.
+
+17. View Cart Total - Test User was quickly and easily able to view their cart total on the icon button in navbar. In mobile screens, the cart amount total is hidden so the user was able to click the icon and be taken to cart page where total is clearly visible in large text at bottom of page as "Grand Total"
+
+18. Pay For Cart Items - Test User reported no issues undertaking this task, reporting it as a very similar and recognisable process to other e-commerce payment flows that they experienced.
+
+19. View Order Confirmation - The Test User was happy to see a clear order confirmation of their purchase with everything appearing to be in order.
+
+20. Order Confirmation Email - I checked the temp email that I supplied to the test user and verified that this was working correctly, with all details appearing to be correct.
+
+21. View Profile - I asked the Test User to find how to view their personal profile page, and they found this quite quickly by navigating to the My Account icon button on navbar and selecting relevant dropdown link.
+
+22. Add A Product - I personally tested this user flow, by logging in as the superuser "heroku-admin". I confirmed that the "Add Product" link on the icon navbar under My Account was only viewable by me the Admin user. The Product form worked correctly, with all relevant form validations working in the case of empty fields, or invalid data, for example Postcode needing to be all numbers instead of letters.
+
+23. Edit A Product - I navigated to the Single Product page to find a small Admin panel under the Product description, only viewable to the Admin user. I confirmed that the Update button in this panel takes me to the Product update form which works correctly like the Add Product form does.
+
+24. Delete A Product - On the same Admin panel, I clicked the Delete button and was presented with a modal popup confirming if I want to delete this item. On clicking yes, I confirmed that the correct product had indeed been deleted, which was the case.
