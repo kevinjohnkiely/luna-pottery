@@ -290,3 +290,22 @@ All sections of the application with just one Bootstrap column display as expect
 + On large screens the footer was a 2 column layout, with the facebook link to the left and the Mailchimp signup form to the right.
 + Once the viewport switched to medium/small screen sizes, this layout changed to a one column grid, with the Mailchimp form appearing on the second row.
 + The Mailchimp form and section needed some custom CSS to fit the overall site theme. This needed some time to fix as this section came with its own image and css, so I needed to make it look as I wished. The Mailchimp logo needed to be resized for extra small screen sizes.
+
+<hr>
+
+## Performance Testing
+
+Coming towards the finalization of development of the application, I tested the performance using Google Chromes Lighthouse feature, the results seen below:
+
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/lighthouse-before.jpg">
+
+Obviously the Accessibilty was the most urgent in need of improving so I set to work by checking the suggested improvements from Lighthouse.
+
++ Fixed the number of duplicate aria ID labels
++ Created more meaningful semantic elements, such as adding a Section element instead of "div id='xyz'"
++ Fixed the hierarchy of heading elements. For example on one page I had a H1, followed further down in the content by a H2, and then a H5. Changing the H5 to a heading size 3 made more sense.
++ In the mobile version of the navbar, there were list item tags with no parent tag, thus I added a Menu tag to house them.
+
+Once I created these fixes, I noticed that the scores for Performance and SEO improved slightly also. I further improved these by reducing the quality on some of the slideshow images for Performance, and added a Meta Description tag to improve SEO. Overall I am much happier with the following scores:
+
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/lighthouse-after.jpg">
