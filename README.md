@@ -310,6 +310,9 @@ Once I created these fixes, I noticed that the scores for Performance and SEO im
 
 <img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/lighthouse-after.jpg">
 
+## User Testing - AUTOMATED
+Due to time constraints on this project, I adopted a manual only testing approach and was unable to carry out automated testing also.
+
 ## User Testing - MANUAL
 
 In order to verify that this application was working correctly, I wanted to thoroughly test all user journeys manually, 21 of which would be undertaken by the Customer, 3 of which by the Admin user. I asked a friend to stand in as the Customer User, and I would personally test the Admin actions.
@@ -361,3 +364,30 @@ In order to verify that this application was working correctly, I wanted to thor
 23. Edit A Product - I navigated to the Single Product page to find a small Admin panel under the Product description, only viewable to the Admin user. I confirmed that the Update button in this panel takes me to the Product update form which works correctly like the Add Product form does.
 
 24. Delete A Product - On the same Admin panel, I clicked the Delete button and was presented with a modal popup confirming if I want to delete this item. On clicking yes, I confirmed that the correct product had indeed been deleted, which was the case.
+
+<hr>
+
+# SEO and Marketing Strategies
+
+In order to employ an efficient marketing strategy to this application, I undertook a three-pronged approach to acheiving this, by way of SEO techniques, Social Media, and Email marketing.
+
+## SEO (Search Engine Optimization)
+As I neared the end of the development of this application, I began to consider how to improve its quality in terms of SEO efficiency. I achieved this by using the following methods:
+
++ Meta HTML Tags - I added the meta description and keywords tags to the head of the base.html document, with the suitable phrases and keywords to assist the SEO. Also I added the title tag to the head of the document, thus these tags appearing on all pages across the site.
++ Hierarchical Heading Content - I ensured that I used h1, h2 and h3 heading tags in the correct order in the page content, with meaningful content related to the sites keywords within these tags.
++ Image Alternative Text - I ensured that all image content in the site had alt tags to further enhance SEO visibility but also to give assistive technologies the data they need for screen readers etc.
++ External Link - I included an external link to a similar business in the footer of the site, with the rel attribute to suit.
++ Effective Keyword Placement - I re-structured some text content in the homepage, to make sure that the websites most relavant keywords appear where they should, and not be hidden from the SEO web crawlers.
+
+## Social Media
+I created a facebook page for this project, with the url for this page linked in the site footer for clear and easy access. The page is [linked here](https://www.facebook.com/profile.php?id=100085932773680), and in case Facebook shuts down this inactive page in near future, some screenshots are available below:
+
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/fb/fb-1.jpg">
+
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/fb/fb-2.jpg">
+
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/fb/fb-3.jpg">
+
+### Email Marketing
+The third and final marketing aspect was an email marketing form, again placed in the footer of the site for convenient access. An account was created with MailChimp, and a form created there. The HTML of this form was then copied into my base.html page, and I modified the design and CSS to suit. I tested out the form with my own gmail address and it works as expected.
