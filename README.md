@@ -479,3 +479,16 @@ This is not an ideal solution as the 50 in the for loop refers to the number of 
 
 <hr>
 
+# Future Application Improvements
+
+During the development of this application I began to consider a number of potential future improvements given a more lengthy timeframe. In the Agile Kanban board, I already listed 3 items as 'Todo' for future iterations of the project, they are:
+
++ Allow the Customer to change a Product Rating
++ Allow the Customer to delete a Product Review
++ Allow the Customer to edit a Product Review
+
+There are also a few more enhancements to this application that could improve it overall:
++ Have an image gallery for each single product page by using a carousel similar to site homepage. This would be ideal for the customer as some products would need multiple image views to get a feel of their quality, given the items 3 dimensional nature. This could also work as a pinch-and-zoom image utilty on mobile devices.
++ Implement a 'rewards' utility where the Customers could earn points with every purchase and result in possible discounts on future purchases. This points total could be accessed on the current User Profile page.
++ Creation of some video content for the Pottery Classes page, to give the viewer a better feel for what is taught and further entice interested customers to purchases some classes. Such extra content creation would also benefit the sites Social Media and SEO strategies.
++ Allow the user to sort products by stock amounts, so they can quickly ignore what items are sold out, or what items have a plentiful supply in stock.
