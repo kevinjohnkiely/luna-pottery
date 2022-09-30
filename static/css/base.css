@@ -177,6 +177,10 @@ input[name='q']::placeholder {
     max-width: 75%;
   }
 
+#footer-bottom a {
+    color: white;
+}
+
 /***** MEDIA QUERIES *****/
 
 /* fixed top navbar only on medium and up */
@@ -222,5 +226,9 @@ input[name='q']::placeholder {
 @media (max-width: 400px) {
     .brandingLogo img {
         width: 100%;
+    }
+
+    #footer-bottom {
+        font-size: small;
     }
 }
