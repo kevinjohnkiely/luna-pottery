@@ -40,7 +40,8 @@ def alter_cart(request, item_id):
 
     if qty > 0:
         cart[item_id] = qty
-        messages.success(request, f'Updated {product.name} quantity to {cart[item_id]}')
+        messages.success(request, f'Updated {product.name} ' + 
+        ' quantity to {cart[item_id]}')
     else:
         cart.pop(item_id)
         messages.success(request, f'Deleted {product.name} from your cart')
