@@ -500,7 +500,8 @@ There are also a few more enhancements to this application that could improve it
 <hr>
 
 # Deployment of Application
-## To successfully deploy the application to Heroku, I undertook the following steps in this sequence:
+
+### To successfully deploy the application to Heroku, I undertook the following steps in this sequence:
 
 1. Create a new app on Heroku with a suitable name
 2. On Resources tab in Heroku, provision a new database by selecting the Heroku Postgres free plan database.
@@ -580,3 +581,14 @@ There are also a few more enhancements to this application that could improve it
 38. Add Stripe API keys STRIPE_PUBLIC_KEY and STRIPE_SECRET_KEY to Heroku Config vars
 39. Add new webhook endpoint in Stripe to reflect heroku endpoint URL, choosing to receive all events
 40. Reveal webhook signing secret and add to Heroku config variables as STRIPE_WH_SECRET.
+
+<hr>
+
+# Credits
++ Some image content for this application came from Pexels (https://www.pexels.com/). All product image content was my own property.
++ Diagnosis and error solutions were greatly helped by consulting the Code Institute Slack Community.
++ Expert guidance on the subject matter given by my Code Institute mentor, Adegbenge Adeye.
++ Icons supplied by [Font Awesome](https://fontawesome.com/v4/)
++ The Code Institute project walkthrough Boutique Ado provided the foundation for the design of this application.
++ Countless tips and solutions accessed on [Stack Overflow](https://stackoverflow.com/)
++ The offical [Django documentation](https://docs.djangoproject.com/en/4.1/) was a big help in some aspects of this project
