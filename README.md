@@ -341,7 +341,7 @@ In order to verify that this application was working correctly, I wanted to thor
 
 12. Remove from Wishlist - The User found it very easy to remove items from wishlist by simply clicking delete buttons underneath each. Again they commented in positive terms about this section.
 
-13. Rate a Product - The Test User found it quite easy to rate a piece, and commented that it was also useful to have the small text message 'You rated this product' appear where the rating form used to be, to inform the user that they have already rated the piece they are viewing.
+13. Rate a Product - The Test User found it quite easy to rate a piece, and commented that it was also useful to have the small text message 'You rated this product' appear where the rating form used to be, to inform the user that they have already rated the piece they are viewing. Also it was verified that the average rating of the product now updated correctly.
 
 14. Add to Cart - Test User was easily able to find how to add items to the cart, and specify a change of quantity before doing so. Again user was pleased to see popup message verifying what they just completed.
 
@@ -390,4 +390,9 @@ I created a facebook page for this project, with the url for this page linked in
 <img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/fb/fb-3.jpg">
 
 ### Email Marketing
-The third and final marketing aspect was an email marketing form, again placed in the footer of the site for convenient access. An account was created with MailChimp, and a form created there. The HTML of this form was then copied into my base.html page, and I modified the design and CSS to suit. I tested out the form with my own gmail address and it works as expected.
+The third and final marketing aspect was an email marketing form, again placed in the footer of the site for convenient access. An account was created with MailChimp, and a form created there. The HTML of this form was then copied into my base.html page, and I modified the design and CSS to suit. I tested out the form with my own gmail address and it works as expected. The form was already shown in the [features section](#footer-section)
+
+<hr>
+
+# Bugs & Errors
+ 
