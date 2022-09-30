@@ -419,7 +419,11 @@ I noticed that this only appeared for some products, and narrowed it down to an 
 This solved the issue and then to complete the fix I had to go into the django admin site and manually delete all ratings which were recorded as NONE instead of zero.
 
 ## Account Setup and Password Reset Emails Not Arriving
-During early testing of the Account setup I noticed that no emails were arriving to my Temp Mail accounts, nor could I receive emails to rest passwords. I carefully checked all the required setup steps and code and could find no errors. However, I finally found the error in the Heroku Config Vars section, where I had the environment variable entered there as EAIL_HOST_PASS, instead of EMAIL_HOST_PASS, a simple typo issue. Once I fixed this typo, the emails worked as expected.
+During early testing of the Account setup I noticed that no emails were arriving to my Temp Mail accounts, nor could I receive emails to rest passwords. The error returned back was as follows:
+
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/errors/signup-error.jpg">
+
+ I carefully checked all the required setup steps and code and could find no errors. However, I finally found the error in the Heroku Config Vars section, where I had the environment variable entered there as EAIL_HOST_PASS, instead of EMAIL_HOST_PASS, a simple typo issue. Once I fixed this typo, the emails worked as expected.
 
 ## Sorting Products by Average Rating Not Working
 Having added products and sorting to the application, I noticed that the products were sorting fine for all methods, except for the average rating. On further investigation, I realised that it was an issue with the name of the rating that I originally applied in the Products model, which was 'avg_rating'.
@@ -492,3 +496,87 @@ There are also a few more enhancements to this application that could improve it
 + Implement a 'rewards' utility where the Customers could earn points with every purchase and result in possible discounts on future purchases. This points total could be accessed on the current User Profile page.
 + Creation of some video content for the Pottery Classes page, to give the viewer a better feel for what is taught and further entice interested customers to purchases some classes. Such extra content creation would also benefit the sites Social Media and SEO strategies.
 + Allow the user to sort products by stock amounts, so they can quickly ignore what items are sold out, or what items have a plentiful supply in stock.
+
+<hr>
+
+# Deployment of Application
+## To successfully deploy the application to Heroku, I undertook the following steps in this sequence:
+
+1. Create a new app on Heroku with a suitable name
+2. On Resources tab in Heroku, provision a new database by selecting the Heroku Postgres free plan database.
+3. In Gitpod, install dj_database-url and psycopg2-binary packages, and freeze the requirements.txt file to ensure Heroku install these on deployment
+4. In settings.py file, import the dj_database_url and add the required database URL from Heroku. Database URL is found in the Config Vars setting in Heroku.
+5. Run migrations once more because we are now connecting to a new database on Heroku.
+6. Create an if/else statement in settings.py file, determining which database is being connected to
+    if "DATABASE_URL" in os.environ:
+        DATABASES = {
+        'default': dj_database_url.parse('postgres://bydautguzdijlc:bda52676988bc7d0af64907579f2d0760f075a912dea7fa4c28fcefde75e8215@ec2-54-228-125-183.eu-west-1.compute.amazonaws.com:5432/da8ju8pb7nn6i7')
+        }
+    else:
+        DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
+7. Create a DATABASE_URL environmental variable in the Gitpod variables.
+8. Create a superuser account that can now login into application connecting to Heroku Database.
+9. Ensure Gitpod is connected to local database, and perform dumpdata commands on the models that I require:
+    python3 manage.py dumpdata products > products.json
+    python3 manage.py dumpdata categories > cats.json
+10. Ensure the connected Database is now the Heroku version
+11. Transfer the data over by the following commands, and in this order due to foreign key constraints:
+    python3 manage.py loaddata products.json
+    python3 manage.py loaddata cats.json
+12. Remove DATABASE_URL from Gitpod variables
+13. Install the gunicorn package to act as web server, and generate requirements.txt file
+14. Create Procfile locally for Heroku web dyno to serve the application.
+15. In terminal type command: heroku config:set DISABLE_COLLECTSTATIC=1
+16. In settings.py, add the heroku app hostname and localhost to ALLOWED_HOSTS collection
+17. Use git commands to add and push to github, then type the command of 'git push heroku main' to deploy to heroku
+18. Set automatic deployments by navigating to Deploy tab in Heroku, search for and connect to repository and select 'Enable Automatic Deploys'
+19. In settings.py, set DEBUG to True only if there is environmental variable called DEVELOPMENT.
+20. In settings.py, remove SECRET_KEY and set it to get this from environmental variable instead, setting its default to empty string.
+
+## Amazon Web Services Deployment
+21. Create a new AWS account at aws.amazon.com, selecting username and password and then open the S3 service.
+22. Create new s3 bucket to match app name in project, and turn on static web hosting in Properties.
+23. In Permissions tab, set relevant CORS configuration
+24. Generate a new security policy for the bucket, copying in ARN (Amazon Resource Name) from previous step
+25. In Access Control List, select List Object to enable access for everyone
+26. Open IAM service in AWS and create a new Group in User Groups section.
+27. Select the user group created, and on Permissions tab open Add Permissions and click attach policy.
+28. Select the polic and click Add Permissions.
+
+## Connect Django to AWS S3 Bucket
+29. In Gitpod workspace install boto3 and django-storages packages, and freeze requirements.txt
+30. In settings.py, add 'storages' to INSTALLED_APPS collection
+31. Check if USE_AWS is in the environment variables and if so add the variables as follows:
+    AWS_STORAGE_BUCKET_NAME = 'luna-pottery'
+    AWS_S3_REGION_NAME = 'eu-west-1'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+32. In Heroku admin, add keys listed in step 31 to Config variables. Also add USE_AWS variable and set to True, and remove the DISABLE_COLLECTSTATIC variable
+33. In Gitpod application root folder, create new file custom_storages.py and add following code:
+    from django.conf import settings
+    from storages.backends.s3boto3 import S3Boto3Storage
+
+    class StaticStorage(S3Boto3Storage):
+    location = settings.STATICFILES_LOCATION
+
+    class MediaStorage(S3Boto3Storage):
+    location = settings.MEDIAFILES_LOCATION
+34. In settings.py, add the following code:
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+35. Perform git push and build project, all static files will be collected succesfully and also appear in static folder in AWS s3 bucket
+36. Go to s3 folder in AWS and create new folder called media, select all product images.
+37. In Manage Public Permissions, select Grant Public Read Access to this object(s), and click upload
+38. Add Stripe API keys STRIPE_PUBLIC_KEY and STRIPE_SECRET_KEY to Heroku Config vars
+39. Add new webhook endpoint in Stripe to reflect heroku endpoint URL, choosing to receive all events
+40. Reveal webhook signing secret and add to Heroku config variables as STRIPE_WH_SECRET.
