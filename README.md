@@ -394,5 +394,88 @@ The third and final marketing aspect was an email marketing form, again placed i
 
 <hr>
 
-# Bugs & Errors
- 
+# Bugs, Errors & Solutions
+During development of the application I encountered a number of bugs and errors, the following list which I was able to find a solution for:
+
+## Error in Popup Message on Cart quantity adjustment
+This was not a serious operational error, but one I wanted to fix nonetheless. During testing I discovered the following message appeared in the Popup Message when adjusting the cart quantity items - 'Updated Holy Water Font quantity to {cart[item_id]}'.
+
+Obviously the django code was appearing where a number should be instead, so on examining the code I found that during my refactoring to get rid of the "line too long" warning, I broke the following line into 2 and this caused the error:
+    messages.success(request, f'Updated {product.name} ' + 
+    ' quantity to {cart[item_id]}')
+
+To fix this I undid the line break and accepted the linting warning, happy that this popup message now showed the correct number format.
+
+## Error with Rating of Products
+During the browsing of some of the products, the following error appeared when I would load an individual product page:
+
+<img src="https://github.com/kevinjohnkiely/luna-pottery-project-5/blob/main/screenshotsWireframes/errors/rating-error.jpg">
+
+I noticed that this only appeared for some products, and narrowed it down to an issue with the ratings added by the user for that item. When the user would click the rating form without selecting any value from 1 to 5, the form would send a NONE value to the backend, instead of the expected value of zero. Thus, I added some code to the Products views.py file, in the add_rating method as follows to handle this:
+
+    if rating.rating is None:
+            rating.rating = 0
+
+This solved the issue and then to complete the fix I had to go into the django admin site and manually delete all ratings which were recorded as NONE instead of zero.
+
+## Account Setup and Password Reset Emails Not Arriving
+During early testing of the Account setup I noticed that no emails were arriving to my Temp Mail accounts, nor could I receive emails to rest passwords. I carefully checked all the required setup steps and code and could find no errors. However, I finally found the error in the Heroku Config Vars section, where I had the environment variable entered there as EAIL_HOST_PASS, instead of EMAIL_HOST_PASS, a simple typo issue. Once I fixed this typo, the emails worked as expected.
+
+## Sorting Products by Average Rating Not Working
+Having added products and sorting to the application, I noticed that the products were sorting fine for all methods, except for the average rating. On further investigation, I realised that it was an issue with the name of the rating that I originally applied in the Products model, which was 'avg_rating'.
+
+The problem with this was that the format of sorting worked ideally with the following  JQuery code:
+
+    var sort = selectedVal.split("_")[0];
+    var direction = selectedVal.split("_")[1];
+
+Due to the fact that the option value in the HTML code also contained one underscore, my adding of 'avg_rating' as a model field would mean 2 underscores, whereby the above code would fail. After much unsuccessful refactoring of both HTML and JQuery code, I found the easiest solution was to just rename the avg_rating in the Model file to 'rating'. This along with running databaes migrations was in the end an easy fix, and the sorting of ratings now worked fine.
+
+## Display Error of Product Stock Warning Colours
+In both the Products page and single product views, I have a stock warning utility where over the images of the products there is a small box with a background colour of green if there is plenty stock left, a warning colour of orange if stocks are running low (less than or equal to 5), or a danger warning of red if no stock remains. During testing I noticed that these displayed all fine, except for if a stock remaining value was 5, then the orange warning did not appear. I discovered in the code that it was a simple logical error in the python code within the HTML page as follows:
+
+    {% if product.in_stock_amount == 0 %}
+        <span class="bg-danger p-2 text-white"><strong>SOLD OUT!</strong></span>
+    {% elif product.in_stock_amount < 5 %}
+        <span class="bg-warning p-2 text-white">Only {{ product.in_stock_amount }} left in stock!</span>
+    {% elif product.in_stock_amount > 5 %}
+        <span class="bg-success p-2 text-white">{{ product.in_stock_amount }} left in stock</span>
+    {% endif %}
+
+I forgot to put "<= 5" in line 3, thus ensuring that the case of stock being equal to 5 would be never reached. I fixed this simple issue by adding the equals symbol.
+
+## Errors on First Heroku Deployment
+After the first deployment to Heroku, I received the following error messages in the logs:
+
+    remote: ERROR: Could not build wheels for backports.zoneinfo, which is required to install pyproject.toml-based projects
+    remote:  ! Push rejected, failed to compile Python app.
+
+I researched this issue and after consulting with some Slack channel posts about similar issues, I decided to uninstall the backports-zoneinfo package, as this only seemed to work with versions of Python less than 3.9, and my project runs on Python version 4+. Deleting the package, and regenerating the requirements.txt file solved this issue, and deployment worked fine.
+
+## Cart Quantity Form Validation Error
+On the cart page, the user is able to adjust the quantity of their item before purchase, and I had some validation to prevent the user selecting a number higher than the amount of that item in stock. This worked fine using the stock amount coming from the model being set as the max value of the input field, however a user could still bypass this by manually typing in a large number, clicking update quantity, and then going to the cart page with an quantity amount not reflecting the stock amount remaining. I wrote some extra JQuery code to fix this issue:
+
+    $('.qty_input').change(function (e) {
+        var id = $(this).data('item_id');
+
+        var x = parseInt($(this).val());
+        var y = parseInt($(this).attr("max"));
+        if (x > y) {
+            $('.update-link-' + id).hide();
+            $('.qty-error-info-' + id).show();
+        } else {
+            $('.update-link-' + id).show();
+            $('.qty-error-info-' + id).hide();
+        }
+    });
+
+The basic operation of this code is a change listener that fires when the user attempts to enter too large a number into the input box. The code checks if this value is larger than the max value, and either allows the update link to be available, or in its place displays a red error box saying "Not Enough Stock". While this fixed the issue, I noticed that this would only work for one input box in the cart, so if mulitple items were in the cart, the red warning notice would appear for unrelated cart items, which was not ideal. As a result I added the following extra code to ensure that the change handler was fired only by the input box that required it:
+
+    for (let x = 0; x <= 50; x++) {
+        $('.qty-error-info-' + x).hide();
+    }
+
+This is not an ideal solution as the 50 in the for loop refers to the number of different products in stock, so if this was increased the developer would have to remember to find this line of code and update accordingly. Also, this method creates a lot of extra potentially avoidable processing loops which may slightly slow down the loading of the cart page. However, given the timeframe constraints I am happy with this fix but recognise with more time I may have come up with a more elegant and future-proofed solution.
+
+<hr>
+
