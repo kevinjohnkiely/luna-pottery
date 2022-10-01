@@ -115,7 +115,7 @@ LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'luna_pottery.wsgi.application'
-CSRF_TRUSTED_ORIGINS = ['https://8000-kevinjohnki-lunapottery-dbge86i93ti.ws-eu67.gitpod.io/']
+CSRF_TRUSTED_ORIGINS = ['https://8000-kevinjohnki-lunapottery-dbge86i93ti.ws-eu67.gitpod.io']
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
