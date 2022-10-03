@@ -79,7 +79,8 @@
                                     </div>
                                 </div>
                             </form>
-                            <a class="text-info update-link-{{ item.item_id }}" style="cursor: pointer;"><small>Update</small></a>
+                            <a class="text-info update-link-{{ item.item_id }}"
+                                style="cursor: pointer;"><small>Update</small></a>
                             <span class="bg-danger text-white p-2 qty-error-info-{{ item.item_id }}">NOT ENOUGH
                                 STOCK!</span>
                             <a class="remove-item text-danger float-right"
@@ -173,7 +174,8 @@
                                     </div>
                                 </div>
                             </form>
-                            <a class="update-link-{{ item.item_id }} text-info" style="cursor: pointer;"><small>Update</small></a>
+                            <a class="update-link-{{ item.item_id }} text-info"
+                                style="cursor: pointer;"><small>Update</small></a>
                             <span class="qty-error-info-{{ item.item_id }} bg-danger text-white p-2">NOT ENOUGH
                                 STOCK!</span>
                             <a class="remove-item text-danger float-right"
@@ -243,6 +245,8 @@
     }
 
     $('.qty_input').change(function (e) {
+        checkMaxQty()
+        
         var id = $(this).data('item_id');
 
         var x = parseInt($(this).val());
@@ -257,7 +261,7 @@
     });
 
     // Perform same function as above if user clicks on Plus Icon button
-    $('.increment-qty').click(function(e) {
+    $('.increment-qty').click(function (e) {
         console.log('asdfdlfsk')
         var id = $(this).data('item_id');
         var x = parseInt($('#id_qty_' + id).val());
@@ -268,9 +272,18 @@
         }
     })
 
-    for (let x = 0; x <= 50; x++) {
-
+    function checkMaxQty() {
+        for (let x = 0; x <= 50; x++) {
+            var a = parseInt($('#id_qty_' + x).val());
+            var b = parseInt($('#id_qty_' + x).attr("max"));
+            console.log(a, b)
+            if (a == b) {
+                $('#increment-qty_' + x).prop('disabled', true)
+            }
+        }
     }
+
+    checkMaxQty()
 
     // Update quantity on click
     for (let x = 0; x <= 50; x++) {
@@ -279,12 +292,7 @@
             form.submit();
         })
 
-        var a = parseInt($('#id_qty_' + x).val());
-        var b = parseInt($('#id_qty_' + x).attr("max"));
-        console.log(a, b)
-        if (a == b) {
-            $('#increment-qty_' + x).prop('disabled', true)
-        }
+
 
     }
 
