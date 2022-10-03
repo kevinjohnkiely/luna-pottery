@@ -256,12 +256,36 @@
         }
     });
 
+    // Perform same function as above if user clicks on Plus Icon button
+    $('.increment-qty').click(function(e) {
+        console.log('asdfdlfsk')
+        var id = $(this).data('item_id');
+        var x = parseInt($('#id_qty_' + id).val());
+        var y = parseInt($('#id_qty_' + id).attr("max"));
+        console.log(id + " " + x + " " + y)
+        if (x >= y) {
+            $(this).prop('disabled', true)
+        }
+    })
+
+    for (let x = 0; x <= 50; x++) {
+
+    }
+
     // Update quantity on click
     for (let x = 0; x <= 50; x++) {
         $('.update-link-' + x).click(function (e) {
             var form = $(this).prev('.update-form');
             form.submit();
         })
+
+        var a = parseInt($('#id_qty_' + x).val());
+        var b = parseInt($('#id_qty_' + x).attr("max"));
+        console.log(a, b)
+        if (a == b) {
+            $('#increment-qty_' + x).prop('disabled', true)
+        }
+
     }
 
     // Remove item and reload on click

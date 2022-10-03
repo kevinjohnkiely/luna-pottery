@@ -123,7 +123,7 @@ CSRF_TRUSTED_ORIGINS = ['https://8000-kevinjohnki-lunapottery-dbge86i93ti.ws-eu6
 
 if "DATABASE_URL" in os.environ:
     DATABASES = {
-        'default': dj_database_url.parse('postgres://bydautguzdijlc:bda52676988bc7d0af64907579f2d0760f075a912dea7fa4c28fcefde75e8215@ec2-54-228-125-183.eu-west-1.compute.amazonaws.com:5432/da8ju8pb7nn6i7')
+        'default': dj_database_url.parse('postgres://cqyxeaohjwinll:5a4d2324f2dbd51362c1c97e90e137d1d1c0a5077ae38d32e2cffe250a5a5bc9@ec2-34-246-25-222.eu-west-1.compute.amazonaws.com:5432/d7lo5l0cqpako0')
     }
 else:
     DATABASES = {
