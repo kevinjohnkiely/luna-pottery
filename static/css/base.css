@@ -220,6 +220,11 @@ input[name='q']::placeholder {
         padding-left: 1rem;
         padding-right: 1rem;
     }
+
+    menu {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
 }
 
 /* For Mailchimp logo to resize on smallest screens */
